@@ -241,6 +241,14 @@ def report_new_arrivals():
             print("<p>&nbsp;&nbsp;&nbsp;Link to bugs: {}</p>".format(link))
 
 
+def report_resolved_bugs():
+    resolved_bugs = get_resolved_bugs()
+    resolved_bugs = filter_by_component(resolved_bugs)
+    total_new = len(all_bugs(resolved_bugs))
+    print(
+        "<h3>Resolved bugs (weekly): {}</h3>".format(total_new)
+    )
+
 def report_open_blockers(version):
     open_blockers = get_open_blockers(version=version)
     open_blockers = filter_by_status(open_blockers, OPEN_BUGS)
@@ -473,6 +481,37 @@ def get_new_arrivals():
         "query_format" : "advanced",
         "target_milestone" : "---",
         "v4" : "Red Hat OpenShift Container Storage"
+    }
+    bugs = bzapi.query(query)
+    return filter_only_bugs(bugs)
+
+
+def get_resolved_bugs():
+    query = {
+       "bug_status" : "VERIFIED,ON_QA",
+       "chfield" : "bug_status",
+       "chfieldfrom" : "-1w",
+       "chfieldto" : "Now",
+       "f3" : "OP",
+       "f4" : "product",
+       "f6" : "CP",
+       "include_fields" : [
+          "product",
+          "component",
+          "assigned_to",
+          "status",
+          "resolution",
+          "summary",
+          "changeddate",
+          "creator",
+          "severity",
+          "opendate",
+          "qa_contact"
+       ],
+       "j3" : "OR",
+       "o4" : "equals",
+       "query_format" : "advanced",
+       "v4" : "Red Hat OpenShift Container Storage"
     }
     bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
