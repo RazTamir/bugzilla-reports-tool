@@ -32,5 +32,5 @@ g.update_sheet(6, 11, overall_backlog)
 
 all_bugs = len(get_all_bugs())
 all_regressions = len(get_all_regression_bugs())
-regression_rate = round(float(all_regressions / all_bugs), 4)
+regression_rate = round((all_regressions / float(all_bugs)), 4)
 g.update_sheet(13, 13, regression_rate)
