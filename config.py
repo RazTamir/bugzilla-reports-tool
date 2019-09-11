@@ -1,4 +1,5 @@
 import bugzilla
+from personal_config import *
 
 # [CHANGE NEEDED] Add the relevant information for you report
 PRODUCT = 'OCS'
@@ -62,7 +63,7 @@ COMPONENTS = {
 
 backlog = {}
 URL = "bugzilla.redhat.com"
-bzapi = bugzilla.Bugzilla(URL)
+bzapi = bugzilla.Bugzilla(URL, user=USER, password=PASSWORD)
 
 VERSION_4_2 = ["---"]
 VERSION_4_3 = ["---"]

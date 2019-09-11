@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import google_api as gapi
 from helpers import *
 import datetime
