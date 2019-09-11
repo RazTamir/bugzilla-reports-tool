@@ -249,6 +249,7 @@ def report_resolved_bugs():
         "<h3>Resolved bugs (weekly): {}</h3>".format(total_new)
     )
 
+
 def report_open_blockers(version):
     open_blockers = get_open_blockers(version=version)
     open_blockers = filter_by_status(open_blockers, OPEN_BUGS)
@@ -504,6 +505,201 @@ def get_resolved_bugs():
     return filter_only_bugs(bugs)
 
 
+def get_qe_backlog(version):
+    query = {
+        "action" : "wrap",
+        "bug_status" : "ON_QA",
+        "f3" : "OP",
+        "f4" : "product",
+        "f6" : "CP",
+        "j3" : "OR",
+        "o4" : "equals",
+        "query_format" : "advanced",
+        "target_milestone" : "---",
+        "v4" : "Red Hat OpenShift Container Storage"
+    }
+    if version == '4.2':
+        bugs = bzapi.query(query)
+        return bugs
+
+
+def get_dev_backlog(version):
+    query = {
+        "action": "wrap",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "component",
+        "f8": "flagtypes.name",
+        "j3": "OR",
+        "n7": "1",
+        "o4": "equals",
+        "o7": "equals",
+        "o8": "notsubstring",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "documentation",
+        "v8": "ocs-4.3"
+
+    }
+    if version == '4.2':
+        bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+        return bugs
+
+
+def get_critical_bugs(version):
+    query = {
+        "action": "wrap",
+        "bug_severity": "urgent",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "j3": "OR",
+        "keywords": "FutureFeature, Improvement, ",
+        "keywords_type": "nowords",
+        "o4": "equals",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage"
+
+    }
+    if version == '4.2':
+        bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+        return bugs
+
+
+def get_regression_bugs(version):
+    query = {
+        "action": "wrap",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "keywords",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "anywordssubstr",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "Regression"
+
+    }
+    if version == '4.2':
+        bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+        return bugs
+
+
+def get_untriaged_bugs(version):
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED,ON_DEV,ON_QA,VERIFIED,RELEASE_PENDING",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "flagtypes.name",
+        "f8": "component",
+        "j3": "OR",
+        "n8": "1",
+        "o4": "equals",
+        "o7": "substring",
+        "o8": "substring",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "ocs-4.2.0?",
+        "v8": "Documentation"
+
+    }
+    if version == '4.2':
+        bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, [
+            "NEW", "ASSIGNED", "POST", "MODIFIED", "ON_DEV", "ON_QA",
+            "VERIFIED", "RELEASE_PENDING"
+        ])
+        return bugs
+
+
+def get_doc_bugs(version):
+    query = {
+        "action": "wrap",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "component",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "equals",
+        "query_format": "advanced",
+        "target_milestone": "---",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "documentation"
+
+    }
+    if version == '4.2':
+        bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+        return bugs
+
+
+def get_overall_backlog(version):
+    query = {
+        "action": "wrap",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED,ON_DEV",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "j3": "OR",
+        "o4": "equals",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage"
+
+    }
+    if version == '4.2':
+        bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+        return bugs
+
+
+def get_all_bugs():
+    query = {
+        "action": "wrap",
+        "bug_status": "__open__,__closed__",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "j3": "OR",
+        "o4": "equals",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage"
+
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+
+def get_all_regression_bugs():
+    query = {
+        "action": "wrap",
+        "bug_status": "__open__,__closed__",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "keywords",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "anywordssubstr",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "Regression"
+
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+
 def get_on_qa_bugs(version):
     query = BASE_QUERY.copy()
     if version == '4.2':
@@ -530,6 +726,7 @@ def get_open_blockers(version):
     }
     if version == '4.2':
         bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
         return bugs
 
 
@@ -538,7 +735,9 @@ def get_open_candidate_blockers(version):
     query['bug_status'] = OPEN_BUGS
     query['v8'] = CANDIDATE_BLOCKER
     if version == '4.2':
-        return bzapi.query(query)
+        bugs = bzapi.query(query)
+        bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+        return bugs
 
 
 def get_on_qa_blockers(version, feature=False):
