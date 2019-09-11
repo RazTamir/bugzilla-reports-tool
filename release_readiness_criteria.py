@@ -1,7 +1,12 @@
 import google_api as gapi
 from helpers import *
+import datetime
 
+now = datetime.datetime.now()
 g = gapi.GoogleSpreadSheetAPI('OCS QE - Quality Dashboard', 1)
+
+
+g.update_sheet(1, 1, "Last update: {}".format(now.strftime("%Y-%m-%d %H:%M")))
 
 qe_backlog = len(get_qe_backlog('4.2'))
 g.update_sheet(6, 3, qe_backlog)
