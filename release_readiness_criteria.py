@@ -9,31 +9,31 @@ g = gapi.GoogleSpreadSheetAPI('OCS QE - Quality Dashboard', 1)
 
 g.update_sheet(1, 1, "Last update: {}".format(now.strftime("%Y-%m-%d %H:%M")))
 
-qe_backlog = len(get_qe_backlog('4.2'))
+qe_backlog = len(get_qe_backlog())
 g.update_sheet(6, 3, qe_backlog)
 
-dev_backlog = len(get_dev_backlog('4.2'))
+dev_backlog = len(get_dev_backlog('ocs-4.2'))
 g.update_sheet(6, 4, dev_backlog)
 
-blockers = len(get_open_blockers('4.2'))
+blockers = len(get_open_blockers())
 g.update_sheet(6, 5, blockers)
 
-candidate_blockers = len(get_open_candidate_blockers('4.2'))
+candidate_blockers = len(get_open_candidate_blockers())
 g.update_sheet(6, 6, candidate_blockers)
 
-critical_bugs = len(get_critical_bugs('4.2'))
+critical_bugs = len(get_critical_bugs())
 g.update_sheet(6, 7, critical_bugs)
 
-regressions = len(get_regression_bugs('4.2'))
+regressions = len(get_regression_bugs())
 g.update_sheet(6, 8, regressions)
 
-untriaged = len(get_untriaged_bugs('4.2'))
+untriaged = len(get_untriaged_bugs())
 g.update_sheet(6, 9, untriaged)
 
-dec_bugs = len(get_doc_bugs('4.2'))
+dec_bugs = len(get_doc_bugs())
 g.update_sheet(6, 10, dec_bugs)
 
-overall_backlog = len(get_overall_backlog('4.2'))
+overall_backlog = len(get_overall_backlog())
 g.update_sheet(6, 11, overall_backlog)
 
 all_bugs = len(get_all_bugs())

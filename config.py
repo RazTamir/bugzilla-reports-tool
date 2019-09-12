@@ -3,6 +3,7 @@ from personal_config import *
 
 # [CHANGE NEEDED] Add the relevant information for you report
 PRODUCT = 'OCS'
+BUGZILLA_PRODUCT = 'Red Hat OpenShift Container Storage'
 VERSION42 = "4.2"
 
 # [CHANGE NEEDED] List here all you teams you want to sample, for example:
@@ -44,7 +45,8 @@ teams = {
     ],
 }
 
-# [CHANGE NEEDED] Add *ALL* the product components exist in Bugzilla
+# [CHANGE NEEDED] Add *ALL* the product components exist in Bugzilla for your
+# product
 COMPONENTS = {
     'ceph': [],
     'build': [],
@@ -57,7 +59,8 @@ COMPONENTS = {
     'rook': [],
     'storage-dashboard': [],
     'unclassified': [],
-    'ocs-operator': []
+    'ocs-operator': [],
+    'must-gather': [],
 
 }
 
