@@ -460,6 +460,10 @@ def sort_target_release(bugs):
     return target_release
 
 
+def sort_by_pm_score(bugs):
+    return sorted(bugs, key=lambda x: int(x.cf_pm_score), reverse=True)
+
+
 def filter_only_bugs(bug_list):
     filtered_list = []
     for bug in bug_list:
