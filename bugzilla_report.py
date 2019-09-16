@@ -18,7 +18,7 @@ report_new_arrivals()
 report_resolved_bugs()
 report_status_on_qa(VERSION42)
 report_on_qa_blockers(VERSION42)
-report_open_blockers(VERSION42)
+report_open_blockers()
 report_open_candidate_blockers(VERSION42)
 
 print("<p></p>")

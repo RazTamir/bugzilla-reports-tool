@@ -250,8 +250,8 @@ def report_resolved_bugs():
     )
 
 
-def report_open_blockers(version):
-    open_blockers = get_open_blockers(version=version)
+def report_open_blockers():
+    open_blockers = get_open_blockers()
     open_blockers = filter_by_status(open_blockers, OPEN_BUGS)
     open_blockers = filter_by_component(open_blockers)
     total_blockers = len(all_bugs(open_blockers))
