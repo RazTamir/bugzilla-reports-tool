@@ -278,8 +278,8 @@ def report_open_blockers():
             print("<p>&nbsp;&nbsp;&nbsp;Link to bugs: {}</p>".format(link))
 
 
-def report_open_candidate_blockers(version):
-    open_blockers = get_open_candidate_blockers(version=version)
+def report_open_candidate_blockers():
+    open_blockers = get_open_candidate_blockers()
     open_blockers = filter_by_status(open_blockers, OPEN_BUGS)
     open_blockers = filter_by_component(open_blockers)
     total_blockers = len(all_bugs(open_blockers))
