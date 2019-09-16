@@ -17,6 +17,7 @@ The quality dashboard is fully automated and the template Google Spreadsheet can
 5. install gspread (pip install gspread) from https://github.com/burnash/gspread on the machine that will execute the script
 6. Under config.py you have few lines that needs your attention to be specific to your product - please follow the guidelines in comments under config.py
 7. Under personal_config.py add your relevant information so the tool will be able to access
+8. Execute with: $ python release_readiness_criteria.py
 
 ## Bugzilla reports
 TODO
