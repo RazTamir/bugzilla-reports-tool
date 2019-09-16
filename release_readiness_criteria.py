@@ -4,7 +4,7 @@ from helpers import *
 import datetime
 
 now = datetime.datetime.now()
-g = gapi.GoogleSpreadSheetAPI('OCS QE - Quality Dashboard', 1)
+g = gapi.GoogleSpreadSheetAPI('{} QE - Quality Dashboard'.format(PRODUCT), 1)
 
 
 g.update_sheet(1, 1, "Last update: {}".format(now.strftime("%Y-%m-%d %H:%M")))
@@ -51,6 +51,11 @@ for idx, bug in enumerate(top_10_bugs):
     g.update_sheet(row, column+6, bug.status)
     g.update_sheet(row, column+7, bug.component)
     g.update_sheet(row, column+8, bug.severity)
+    converted = datetime.datetime.strptime(
+        bug.creation_time.value, "%Y%m%dT%H:%M:%S"
+    )
+    g.update_sheet(row, column + 9, (now - converted).days)
+
 
 # Regression rate
 all_bugs = len(get_all_bugs())
