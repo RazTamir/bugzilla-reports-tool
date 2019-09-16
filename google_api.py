@@ -20,7 +20,7 @@ class GoogleSpreadSheetAPI(object):
             'https://spreadsheets.google.com/feeds',
             'https://www.googleapis.com/auth/drive'
         ]
-        google_api = os.path.expanduser('~/.gapi/google_api_secret.json')
+        google_api = os.path.expanduser('~/.ocs-ci/google_api_secret.json')
         creds = ServiceAccountCredentials.from_json_keyfile_name(
             google_api, scope
         )

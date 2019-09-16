@@ -6,12 +6,12 @@ PRODUCT = 'OCS'
 BUGZILLA_PRODUCT = 'Red Hat OpenShift Container Storage'
 VERSION42 = "4.2"
 
-# [CHANGE NEEDED] List here all you teams you want to sample, for example:
-manage = "manage"
-e2e = "e2e"
-ecosystem = "ecosystem"
+# [CHANGE NEEDED] List here all the teams you want to sample, for example:
+team1 = "manage"
+team2 = "e2e"
+team3 = "ecosystem"
 
-all_team = [manage, e2e, ecosystem]
+all_team = [team1, team2, team3]
 
 severity = {
     "urgent": 1,
@@ -21,25 +21,24 @@ severity = {
     "unspecified": 5
 }
 
-# [CHANGE NEEDED] modify the team names
 BUGS_BY_TEAM = {
-    manage: [],
-    e2e: [],
-    ecosystem: [],
+    team1: [],
+    team2: [],
+    team3: [],
 }
 
 # [CHANGE NEEDED] Add the team members divided into teams. For example:
 teams = {
-    manage: [
+    team1: [
         "ebenahar", "belimele", "ebondare", "hnallurv", "jijoy", "nberry",
         "pbyregow", "prsurve", "sshreeka", "sagrawal", "tdesala",
-        "fbalak", "mbukatov"
+        "fbalak", "mbukatov", "apolak", "srozen",
     ],
-    e2e: [
+    team2: [
         "tmuthami", "kramdoss", "akrai", "ksandha", "rperiyas", "sraghave",
-        "tunguyen", "wusui", "yweinste"
+        "tunguyen", "wusui", "alayani", "savetisy"
     ],
-    ecosystem: [
+    team3: [
         "pbalogh", "clacroix", "dahorak", "shmohan", "vavuthu",
         "ratamir", "vakulkar"
     ],

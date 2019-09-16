@@ -553,23 +553,25 @@ def get_dev_backlog(version):
 
 
 def get_critical_bugs():
-    query = {
-        "action": "wrap",
-        "bug_severity": "urgent",
-        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
-        "f3": "OP",
-        "f4": "product",
-        "f6": "CP",
-        "j3": "OR",
-        "keywords": "FutureFeature, Improvement, ",
-        "keywords_type": "nowords",
-        "o4": "equals",
-        "query_format": "advanced",
-        "v4": BUGZILLA_PRODUCT
+    bugs = []
+    for severity in ['high', 'urgent']:
+        query = {
+            "action": "wrap",
+            "bug_severity": severity,
+            "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+            "f3": "OP",
+            "f4": "product",
+            "f6": "CP",
+            "j3": "OR",
+            "keywords": "FutureFeature, Improvement, ",
+            "keywords_type": "nowords",
+            "o4": "equals",
+            "query_format": "advanced",
+            "v4": BUGZILLA_PRODUCT
 
-    }
-    bugs = bzapi.query(query)
-    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+        }
+        urgent_bugs = bzapi.query(query)
+        bugs += filter_by_status(urgent_bugs, OPEN_BUGS_LIST)
     return bugs
 
 
@@ -693,6 +695,25 @@ def get_all_regression_bugs():
         "v4": BUGZILLA_PRODUCT,
         "v7": "Regression"
 
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+
+def get_all_failedqa_bugs():
+    query = {
+        "action": "wrap",
+        "bug_status": "__open__,__closed__",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "cf_verified",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "substring",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v7": "FailedQA"
     }
     bugs = bzapi.query(query)
     return bugs

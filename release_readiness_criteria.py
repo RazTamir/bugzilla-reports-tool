@@ -52,7 +52,13 @@ for idx, bug in enumerate(top_10_bugs):
     g.update_sheet(row, column+7, bug.component)
     g.update_sheet(row, column+8, bug.severity)
 
+# Regression rate
 all_bugs = len(get_all_bugs())
 all_regressions = len(get_all_regression_bugs())
 regression_rate = round((all_regressions / float(all_bugs)), 4)
 g.update_sheet(10, 2, regression_rate)
+
+# FailedQA rate
+all_failed_qa = len(get_all_failedqa_bugs())
+failed_qa_rate = round((all_failed_qa / float(all_bugs)), 4)
+g.update_sheet(13, 2, failed_qa_rate)
