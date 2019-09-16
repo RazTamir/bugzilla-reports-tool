@@ -3,7 +3,7 @@
 This tool will allow you to create a Quality dashboard for your product and send (weekly) reports with bug status.
 An exeample of this dashboard:
 
-![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/Screenshot%20from%202019-09-16%2017-07-19.png)
+![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/Screenshot%20from%202019-09-16%2017-07-19.png)
 
 ## Quality dashboard
 ### Usage:
