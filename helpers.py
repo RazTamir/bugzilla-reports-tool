@@ -137,7 +137,7 @@ def report_new_arrivals():
     print(
         "<h3>New arrivals (weekly): {}</h3>".format(total_new)
     )
-    for comp, bugs in new_bugs.iteritems():
+    for comp, bugs in new_bugs.items():
         bug_id_list = []
         bugs.sort(key=lambda x: severity[x.bug_severity])
         if bugs:
@@ -174,7 +174,7 @@ def report_open_blockers():
     print(
         "<h3>Open Blocker+: {}</h3>".format(total_blockers)
     )
-    for comp, bugs in open_blockers.iteritems():
+    for comp, bugs in open_blockers.items():
         bug_id_list = []
         bugs.sort(key=lambda x: severity[x.bug_severity])
         if bugs:
@@ -202,7 +202,7 @@ def report_open_candidate_blockers():
     print(
         "<h3>Open Blocker?: {}</h3>".format(total_blockers)
     )
-    for comp, bugs in open_blockers.iteritems():
+    for comp, bugs in open_blockers.items():
         bug_id_list = []
         bugs.sort(key=lambda x: severity[x.bug_severity])
         if bugs:
@@ -245,7 +245,7 @@ def report_missing_acks(version, team=all_team):
     total_missing_acks = len(missing_acks)
     if team == all_team and total_missing_acks > 0:
         team_bugs = filter_by_team(bugs=missing_acks)
-        for team, bugs in team_bugs.iteritems():
+        for team, bugs in team_bugs.items():
             bug_id_list = [str(bug.id) for bug in bugs]
             short_url = get_bug_url_link(bug_id_list)
             link = ""
@@ -284,7 +284,7 @@ def filter_by_team(bugs):
         try:
             qa_contact = bug.qa_contact_detail['email'].split('@')[0]
             if qa_contact in all_members():
-                for team, members in teams.iteritems():
+                for team, members in teams.items():
                     if qa_contact in members:
                         bugs_by_team[team].append(bug)
         except AttributeError as ex:
