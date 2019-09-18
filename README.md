@@ -12,12 +12,13 @@ The quality dashboard is fully automated and the template Google Spreadsheet can
 1. Copy this template and add your team name in the titie --> <"YOUR TEAM NAME"> QE - Quality Dashboard
 
 2. To enable interaction with Google spreadsheet, follow the steps in https://developers.google.com/sheets/api/quickstart/python
-3. place the google_api_secret.json under ~/.gapi/google_api_secret.json
-4. Ensure you give 'Edit' permissions in your copied spreadsheet, to the 'client' in this json file
-5. install gspread (pip install gspread) from https://github.com/burnash/gspread on the machine that will execute the script
-6. Under config.py you have few lines that needs your attention to be specific to your product - please follow the guidelines in comments under config.py
-7. Under personal_config.py add your relevant information so the tool will be able to access
-8. Execute with: $ python release_readiness_criteria.py
+3. Creeate .gapi directory under root with: $ mkdir /root/.gapi
+5. place the google_api_secret.json under ~/.gapi/google_api_secret.json
+6. Ensure you give 'Edit' permissions in your copied spreadsheet, to the 'client' in this json file
+7. install gspread (pip install gspread) from https://github.com/burnash/gspread and python-bugzilla (pip install python-bugzilla) from https://github.com/python-bugzilla/python-bugzilla on the machine that will execute the script
+8. Under config.py you have few lines that needs your attention to be specific to your product - please follow the guidelines in comments under config.py
+9. Under personal_config.py add your relevant information so the tool will be able to access
+10. Execute with: $ python release_readiness_criteria.py
 
 ## Bugzilla reports
 TODO
