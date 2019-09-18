@@ -4,10 +4,10 @@ from helpers import *
 import datetime
 
 now = datetime.datetime.now()
-g = gapi.GoogleSpreadSheetAPI('{} QE - Quality Dashboard'.format(PRODUCT), 1)
+g = gapi.GoogleSpreadSheetAPI(f'{PRODUCT} QE - Quality Dashboard', 1)
 
 
-g.update_sheet(1, 1, "Last update: {}".format(now.strftime("%Y-%m-%d %H:%M")))
+g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
 
 qe_backlog = len(get_qe_backlog())
 g.update_sheet(6, 3, qe_backlog)
@@ -43,8 +43,9 @@ for idx, bug in enumerate(top_10_bugs):
     g.update_sheet(
         row,
         column,
-        '=HYPERLINK("https://bugzilla.redhat.com/show_bug.cgi?id={}", "{}")'.format(
-            bug.bug_id, bug.bug_id
+        (
+            f'=HYPERLINK("https://bugzilla.redhat.com/show_bug'
+            f'.cgi?id={bug.bug_id}", "{bug.bug_id}")'
         )
     )
     g.update_sheet(row, column+1, bug.summary)
