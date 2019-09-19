@@ -3,8 +3,9 @@ from personal_config import *
 
 # [CHANGE NEEDED] Add the relevant information for you report
 PRODUCT = 'OCS'
+VERSION = "4.2"
 BUGZILLA_PRODUCT = 'Red Hat OpenShift Container Storage'
-VERSION42 = "4.2"
+BUGZILLA_VERSION_FLAG = 'ocs-4.2.0?'
 
 # [CHANGE NEEDED] List here all the teams you want to sample, for example:
 team1 = "manage"
