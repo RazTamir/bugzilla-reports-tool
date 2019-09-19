@@ -635,6 +635,64 @@ def get_all_failedqa_bugs():
     return bugs
 
 
+def get_all_verified_bugs():
+    query = {
+        "bug_status": "VERIFIED,RELEASE_PENDING,CLOSED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "bug_status",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "changedto",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v7": "VERIFIED"
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+
+def get_verified_weekly(changed_from='-1w', changed_to='Now'):
+    query = {
+        "bug_status": "VERIFIED,RELEASE_PENDING,CLOSED",
+        "chfieldfrom": changed_from,
+        "chfieldto": changed_to,
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "bug_status",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "changedto",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v7": "VERIFIED"
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+
+def get_all_ready_for_testing_bugs():
+    query = {
+        "bug_status": "",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "bug_status",
+        "j3": "OR",
+        "keywords": "Reopened",
+        "keywords_type": "nowords",
+        "o4": "equals",
+        "o7": "changedto",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v7": "ON_QA"
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+
 def get_on_qa_bugs(version):
     query = BASE_QUERY.copy()
     if version == '4.2':

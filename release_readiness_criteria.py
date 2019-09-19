@@ -68,3 +68,19 @@ g.update_sheet(10, 2, regression_rate)
 all_failed_qa = len(get_all_failedqa_bugs())
 failed_qa_rate = round((all_failed_qa / float(all_bugs)), 4)
 g.update_sheet(13, 2, failed_qa_rate)
+
+# Verification rate
+all_verified = len(get_all_verified_bugs())
+all_ready_for_testing = len(get_all_ready_for_testing_bugs())
+failed_qa_rate = round((all_verified / float(all_ready_for_testing)), 4)
+g.update_sheet(16, 2, failed_qa_rate)
+
+# Verification rate weekly
+verified_weekly = 0
+for c_from, c_to in [
+    ('-1w', 'Now'), ('-2w', '-1w'), ('-3w', '-2w'), ('-4w', '-3w'),
+    ('-5w', '-4w'), ('-6w', '-5w'), ('-7w', '-6w'), ('-8w', '-7w')
+]:
+    this_week = len(get_verified_weekly(c_from, c_to))
+    verified_weekly += this_week
+g.update_sheet(19, 2, verified_weekly / 8)
