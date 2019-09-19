@@ -5,7 +5,7 @@ from personal_config import *
 PRODUCT = 'OCS'
 VERSION = "4.2"
 BUGZILLA_PRODUCT = 'Red Hat OpenShift Container Storage'
-BUGZILLA_VERSION_FLAG = 'ocs-4.2.0?'
+BUGZILLA_VERSION_FLAG = 'ocs-4.2.0'
 
 # [CHANGE NEEDED] List here all the teams you want to sample, for example:
 team1 = "manage"
@@ -67,9 +67,6 @@ COMPONENTS = {
 backlog = {}
 URL = "bugzilla.redhat.com"
 bzapi = bugzilla.Bugzilla(URL, user=USER, password=PASSWORD)
-
-VERSION_4_2 = ["---"]
-VERSION_4_3 = ["---"]
 
 # Bug statuses
 VERIFIED = "VERIFIED"
