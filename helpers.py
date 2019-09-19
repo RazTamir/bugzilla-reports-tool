@@ -61,12 +61,6 @@ def send_email(gmail_user, gmail_password, recipients, subject, body):
         print('Something went wrong...{}', sys.exc_info()[0])
 
 
-missing_acks_42 = bzapi.build_query(
-    target_milestone=VERSION_4_2,
-    flag=MISSING_ACK
-)
-
-
 def all_members():
     memb_list = teams.values()
     return [mem for team in memb_list for mem in team]
@@ -117,8 +111,8 @@ def report_needinfos():
         )
 
 
-def report_status_on_qa(version):
-    on_qa = get_on_qa_bugs(version=version)
+def report_status_on_qa():
+    on_qa = get_on_qa_bugs()
     total_on_qa = len(on_qa)
     bug_id_list = [str(bug.id) for bug in on_qa]
     short_url = get_bug_url_link(bug_id_list)
@@ -221,44 +215,6 @@ def report_open_candidate_blockers():
             print("<p>&nbsp;&nbsp;&nbsp;Link to bugs: {}</p>".format(link))
 
 
-def report_missing_acks(version, team=all_team):
-
-    def print_report(team_bugs):
-        bug_list = []
-        for bug in team_bugs:
-            try:
-                print(
-                    "<li>Bug {} [{}]: {}</li>".format(
-                        bug.bug_id, bug.qa_contact.split("@")[0], bug.short_desc
-                    )
-                )
-                bug_list.append(str(bug.id))
-            except AttributeError as ex:
-                print("No needinfo contact for bug {}".format(bug.id))
-
-        short_url = get_bug_url_link(bug_list)
-        link = "<a href='{}' target='_blank'>here".format(short_url)
-        print(
-            "<p>&nbsp;&nbsp;&nbsp;Link to bugs: {}</p>".format(link)
-        )
-    missing_acks = get_missing_acks(version=version)
-    total_missing_acks = len(missing_acks)
-    if team == all_team and total_missing_acks > 0:
-        team_bugs = filter_by_team(bugs=missing_acks)
-        for team, bugs in team_bugs.items():
-            bug_id_list = [str(bug.id) for bug in bugs]
-            short_url = get_bug_url_link(bug_id_list)
-            link = ""
-            if len(bug_id_list) > 0:
-                link = "<a href='{}' target='_blank'>(Link)".format(short_url)
-                print(
-                    "<u><b><ul style='padding-left:10px;'>Team {} total "
-                    "missing acks: {} - "
-                    "</ul></b></u>".format(team, len(bugs), link)
-                )
-                print_report(bugs)
-
-
 def filter_by_component(bugs):
     bugs_by_comp = copy.deepcopy(COMPONENTS)
     for bug in bugs:
@@ -268,7 +224,10 @@ def filter_by_component(bugs):
             )
         ):
             continue
-        bugs_by_comp[bug.component].append(bug)
+        if bug.component in bugs_by_comp:
+            bugs_by_comp[bug.component].append(bug)
+        else:
+            continue
     return bugs_by_comp
 
 
@@ -297,7 +256,7 @@ def filter_by_status(bugs, status):
     return [bug for bug in bugs if bug.status in status]
 
 
-def report_on_qa_blockers(version):
+def report_on_qa_blockers():
 
     def print_report(bugs):
         bug_list = []
@@ -318,7 +277,7 @@ def report_on_qa_blockers(version):
                 "<p>&emsp;&emsp;&emsp;Link to bugs: {}</p>".format(link)
             )
 
-    on_qa_blockers = get_on_qa_blockers(version=version)
+    on_qa_blockers = get_on_qa_blockers()
     total_on_qa_blockers = len(on_qa_blockers)
     bug_id_list = [str(bug.id) for bug in on_qa_blockers]
     short_url = get_bug_url_link(bug_id_list)
@@ -512,7 +471,7 @@ def get_regression_bugs():
     return bugs
 
 
-def get_untriaged_bugs():
+def get_untriaged_bugs(version_flag):
     query = {
         "bug_status": "NEW,ASSIGNED,POST,MODIFIED,ON_DEV,ON_QA,VERIFIED,RELEASE_PENDING",
         "f3": "OP",
@@ -527,7 +486,7 @@ def get_untriaged_bugs():
         "o8": "substring",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "ocs-4.2.0?",
+        "v7": version_flag,
         "v8": "Documentation"
 
     }
@@ -693,12 +652,11 @@ def get_all_ready_for_testing_bugs():
     return bugs
 
 
-def get_on_qa_bugs(version):
+def get_on_qa_bugs():
     query = BASE_QUERY.copy()
-    if version == '4.2':
-        query['bug_status'] = ON_QA
-        bugs = bzapi.query(query)
-        return filter_only_bugs(bugs)
+    query['bug_status'] = ON_QA
+    bugs = bzapi.query(query)
+    return filter_only_bugs(bugs)
 
 
 def get_open_blockers():
@@ -731,16 +689,10 @@ def get_open_candidate_blockers():
     return bugs
 
 
-def get_on_qa_blockers(version):
+def get_on_qa_blockers():
     query = BASE_QUERY.copy()
     query['bug_status'] = ON_QA
     query['v8'] = BLOCKER
-    if version == '4.2':
-        bugs = bzapi.query(query)
+    bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
 
-
-def get_missing_acks(version):
-    if version == '4.2':
-        bugs = bzapi.query(missing_acks_42)
-    return bugs

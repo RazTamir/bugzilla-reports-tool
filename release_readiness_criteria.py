@@ -12,7 +12,7 @@ g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
 qe_backlog = len(get_qe_backlog())
 g.update_sheet(6, 3, qe_backlog)
 
-dev_backlog = len(get_dev_backlog('ocs-4.2'))
+dev_backlog = len(get_dev_backlog(f'{PRODUCT}-{VERSION}'))
 g.update_sheet(6, 4, dev_backlog)
 
 blockers = len(get_open_blockers())
@@ -27,7 +27,7 @@ g.update_sheet(6, 7, critical_bugs)
 regressions = len(get_regression_bugs())
 g.update_sheet(6, 8, regressions)
 
-untriaged = len(get_untriaged_bugs())
+untriaged = len(get_untriaged_bugs(BUGZILLA_VERSION_FLAG))
 g.update_sheet(6, 9, untriaged)
 
 dec_bugs = len(get_doc_bugs())
@@ -36,7 +36,7 @@ g.update_sheet(6, 10, dec_bugs)
 overall_backlog = len(get_overall_backlog())
 g.update_sheet(6, 11, overall_backlog)
 
-top_10_bugs = sort_by_pm_score(get_dev_backlog('ocs-4.2'))[:10]
+top_10_bugs = sort_by_pm_score(get_dev_backlog(f'{PRODUCT}-{VERSION}'))[:10]
 for idx, bug in enumerate(top_10_bugs):
     row = 10 + idx
     column = 7
