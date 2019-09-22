@@ -7,7 +7,7 @@ An exeample of this dashboard:
 
 ## Quality dashboard
 ### Usage:
-The quality dashboard is fully automated and the template Google Spreadsheet can be found here - https://docs.google.com/spreadsheets/d/1h62gN1fINImncOmLCVVTSVZJOrtjdLqik8gSTdVNYJw/edit?usp=sharing
+The quality dashboard is fully automated and the template Google Spreadsheet can be found here - https://docs.google.com/spreadsheets/d/1Y0m8XHuqXZsI7-QwHWxUBpJv6URq2yf3AMUmNR3WON4/edit?usp=sharing
 
 1. Copy this template and add your team name in the titie --> <"YOUR TEAM NAME"> QE - Quality Dashboard
 
