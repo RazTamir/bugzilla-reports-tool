@@ -4,7 +4,9 @@ from helpers import *
 import datetime
 
 now = datetime.datetime.now()
-g = gapi.GoogleSpreadSheetAPI(f'{PRODUCT} QE - Quality Dashboard', 1)
+g = gapi.GoogleSpreadSheetAPI(
+    f'{PRODUCT} QE - Quality Dashboard', "Release Readiness Criteria"
+)
 
 
 g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
