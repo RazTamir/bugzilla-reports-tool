@@ -3,7 +3,6 @@ import sys
 import copy
 import smtplib
 import ssl
-import urllib.request as request
 from config import *
 
 from email.mime.multipart import MIMEMultipart
@@ -23,7 +22,6 @@ BASE_QUERY = {
     "o4" : "equals",
     "o8" : "anywordssubstr",
     "query_format" : "advanced",
-    "target_milestone" : "---",
     "v4" : BUGZILLA_PRODUCT,
     "v8" : ""
 }
@@ -72,15 +70,10 @@ def all_bugs(bugs_dict):
 
 
 def get_bug_url_link(bug_ids):
-    bz_url = (
+    return (
         "https://bugzilla.redhat.com/buglist.cgi?bug_id={}".format(
             ','.join(bug_ids)
         )
-    )
-    return (
-        request.urlopen(
-            "http://url.corp.redhat.com/new?{}".format(bz_url)
-        ).read()
     )
 
 
@@ -671,7 +664,6 @@ def get_open_blockers():
         "o4" : "equals",
         "o8" : "anywordssubstr",
         "query_format" : "advanced",
-        "target_milestone" : "---",
         "v4" : BUGZILLA_PRODUCT,
         "v8" : "blocker+"
     }
