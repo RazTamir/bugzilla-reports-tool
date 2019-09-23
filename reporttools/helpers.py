@@ -3,7 +3,8 @@ import sys
 import copy
 import smtplib
 import ssl
-from config import *
+
+from reporttools.config import *
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -14,16 +15,16 @@ ctx.verify_mode = ssl.CERT_NONE
 
 BASE_QUERY = {
     "bug_status": None,
-    "f3" : "OP",
-    "f4" : "product",
-    "f6" : "CP",
-    "f8" : "flagtypes.name",
-    "j3" : "OR",
-    "o4" : "equals",
-    "o8" : "anywordssubstr",
-    "query_format" : "advanced",
-    "v4" : BUGZILLA_PRODUCT,
-    "v8" : ""
+    "f3": "OP",
+    "f4": "product",
+    "f6": "CP",
+    "f8": "flagtypes.name",
+    "j3": "OR",
+    "o4": "equals",
+    "o8": "anywordssubstr",
+    "query_format": "advanced",
+    "v4": BUGZILLA_PRODUCT,
+    "v8": ""
 }
 
 

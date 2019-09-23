@@ -1,5 +1,6 @@
 import bugzilla
-from personal_config import *
+
+from reporttools.personal_config import *
 
 # [CHANGE NEEDED] Add the relevant information for you report
 PRODUCT = 'OCS'
