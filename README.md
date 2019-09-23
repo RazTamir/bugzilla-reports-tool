@@ -11,7 +11,8 @@ The quality dashboard is fully automated and the template Google Spreadsheet can
 
 1. Copy this template and add your team name in the titie --> <"YOUR TEAM NAME"> QE - Quality Dashboard
 
-2. To enable interaction with Google spreadsheet, follow the steps in https://developers.google.com/sheets/api/quickstart/python
+2. To enable interaction with Google spreadsheet, follow the steps in https://developers.google.com/sheets/api/quickstart/python and after steps in here https://gspread.readthedocs.io/en/latest/oauth2.html#oauth-credentials (until step 6). 
+Name the Json from step 3 as 'google_api_secret.json'
 3. Creeate .gapi directory under root with: $ mkdir /root/.gapi
 5. place the google_api_secret.json under ~/.gapi/google_api_secret.json
 6. Ensure you give 'Edit' permissions in your copied spreadsheet, to the 'client' in this json file
