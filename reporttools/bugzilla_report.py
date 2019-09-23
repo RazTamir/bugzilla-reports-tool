@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import datetime
-
-from helpers import *
-from personal_config import *
 import sys
+
+from reporttolls.helpers import *
+from reporttolls.personal_config import *
+
 
 temp = sys.stdout
 sys.stdout = open(f'report_{PRODUCT}_status', 'w')
