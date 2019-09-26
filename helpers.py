@@ -476,12 +476,13 @@ def get_untriaged_bugs(version_flag):
         "j3": "OR",
         "n8": "1",
         "o4": "equals",
-        "o7": "substring",
+        "o7": "regexp",
         "o8": "substring",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
         "v7": f'{version_flag}.*[?]',
         "v8": "Documentation"
+
 
     }
     bugs = bzapi.query(query)
