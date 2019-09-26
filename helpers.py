@@ -480,7 +480,7 @@ def get_untriaged_bugs(version_flag):
         "o8": "substring",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": f'{version_flag}?',
+        "v7": f'{version_flag}.*[?]',
         "v8": "Documentation"
 
     }
