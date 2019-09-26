@@ -5,7 +5,10 @@ from personal_config import *
 PRODUCT = 'OCS'
 VERSION = "4.2"
 BUGZILLA_PRODUCT = 'Red Hat OpenShift Container Storage'
-BUGZILLA_VERSION_FLAG = 'ocs-4.2.0'
+# The version flag should contain only x and y releases:
+# ocs-4.2.0 --> ocs-x.y.z so you'll need to add only ocs-4.2 in order to see
+# all bugs in version x.y
+BUGZILLA_VERSION_FLAG = 'ocs-4.2'
 
 # [CHANGE NEEDED] List here all the teams you want to sample, for example:
 team1 = "manage"

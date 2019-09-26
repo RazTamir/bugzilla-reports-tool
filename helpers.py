@@ -381,16 +381,17 @@ def get_resolved_bugs():
 
 def get_qe_backlog():
     query = {
-        "action" : "wrap",
-        "bug_status" : "ON_QA",
-        "f3" : "OP",
-        "f4" : "product",
-        "f6" : "CP",
-        "j3" : "OR",
-        "o4" : "equals",
-        "query_format" : "advanced",
-        "target_milestone" : "---",
-        "v4" : BUGZILLA_PRODUCT
+        "bug_status": "ON_QA",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "flagtypes.name",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "substring",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v7": BUGZILLA_VERSION_FLAG
     }
     bugs = bzapi.query(query)
     return bugs
@@ -520,10 +521,13 @@ def get_overall_backlog():
         "f3": "OP",
         "f4": "product",
         "f6": "CP",
+        "f7": "component",
         "j3": "OR",
         "o4": "equals",
+        "o7": "nowordssubstr",
         "query_format": "advanced",
-        "v4": BUGZILLA_PRODUCT
+        "v4": BUGZILLA_PRODUCT,
+        "v7": "Documentation"
 
     }
     bugs = bzapi.query(query)
@@ -654,18 +658,21 @@ def get_on_qa_bugs():
 
 def get_open_blockers():
     query = {
-        "action" : "wrap",
-        "bug_status" : "NEW,ASSIGNED,POST,MODIFIED",
-        "f3" : "OP",
-        "f4" : "product",
-        "f6" : "CP",
-        "f8" : "flagtypes.name",
-        "j3" : "OR",
-        "o4" : "equals",
-        "o8" : "anywordssubstr",
-        "query_format" : "advanced",
-        "v4" : BUGZILLA_PRODUCT,
-        "v8" : "blocker+"
+        "action": "wrap",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f8": "flagtypes.name",
+        "f9": "flagtypes.name",
+        "j3": "OR",
+        "o4": "equals",
+        "o8": "anywordssubstr",
+        "o9": "substring",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v8": "blocker+",
+        "v9": BUGZILLA_VERSION_FLAG
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
@@ -673,9 +680,23 @@ def get_open_blockers():
 
 
 def get_open_candidate_blockers():
-    query = BASE_QUERY.copy()
-    query['bug_status'] = OPEN_BUGS
-    query['v8'] = CANDIDATE_BLOCKER
+    query = {
+        "action": "wrap",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f8": "flagtypes.name",
+        "f9": "flagtypes.name",
+        "j3": "OR",
+        "o4": "equals",
+        "o8": "anywordssubstr",
+        "o9": "substring",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v8": "blocker?",
+        "v9": BUGZILLA_VERSION_FLAG
+    }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
     return bugs
