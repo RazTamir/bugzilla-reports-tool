@@ -423,24 +423,23 @@ def get_dev_backlog(version):
 
 def get_critical_bugs():
     bugs = []
-    for severity in ['high', 'urgent']:
-        query = {
-            "action": "wrap",
-            "bug_severity": severity,
-            "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
-            "f3": "OP",
-            "f4": "product",
-            "f6": "CP",
-            "j3": "OR",
-            "keywords": "FutureFeature, Improvement, ",
-            "keywords_type": "nowords",
-            "o4": "equals",
-            "query_format": "advanced",
-            "v4": BUGZILLA_PRODUCT
+    query = {
+        "action": "wrap",
+        "bug_severity": "urgent",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "j3": "OR",
+        "keywords": "FutureFeature, Improvement, ",
+        "keywords_type": "nowords",
+        "o4": "equals",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT
 
-        }
-        urgent_bugs = bzapi.query(query)
-        bugs += filter_by_status(urgent_bugs, OPEN_BUGS_LIST)
+    }
+    urgent_bugs = bzapi.query(query)
+    bugs += filter_by_status(urgent_bugs, OPEN_BUGS_LIST)
     return bugs
 
 
