@@ -709,3 +709,62 @@ def get_on_qa_blockers():
     bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
 
+
+def get_deployment_blockers():
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "cf_qa_whiteboard",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "anywordssubstr",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "Deployment_blocker"
+
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
+def get_feature_blockers():
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "cf_qa_whiteboard",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "anywordssubstr",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "Feature_blocker"
+
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
+def get_stability_bugs():
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "cf_qa_whiteboard",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "anywordssubstr",
+        "query_format": "advanced",
+        "v4": "Red Hat OpenShift Container Storage",
+        "v7": "Stability"
+
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
