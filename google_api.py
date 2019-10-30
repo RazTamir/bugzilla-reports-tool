@@ -42,3 +42,15 @@ class GoogleSpreadSheetAPI(object):
 
     def insert_row(self, value, row_index=2):
         return self.sheet.insert_row(value, row_index)
+
+    def clean_rows(self, column, initial_row, end_row):
+        for row in range(initial_row, end_row + 1):
+            if self.get_cell_value(row, column):
+                self.update_sheet(row, column, "")
+                self.update_sheet(row, column + 1, "")
+                self.update_sheet(row, column + 6, "")
+                self.update_sheet(row, column + 7, "")
+                self.update_sheet(row, column + 8, "")
+                self.update_sheet(row, column + 9, "")
+            else:
+                break
