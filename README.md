@@ -34,5 +34,18 @@ Same steps as above whith changing the script you execute in step 8 to tracking_
 
 
 ## Bugzilla reports
-TODO
+An example of this report:
+![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/Screenshot%20from%202019-11-04%2019-49-55.png)
+
+
+#### Sections currently available:
+* New arrivals
+* Resolved bugs (count only)
+* Total ON_QA (count only)
+* ON_QA 'blockers'
+* Open 'blockers?'
+* Open 'blockers+'
+
+### Usage:
+Same steps as above whith changing the script you execute in step 8 to bugzilla_report.py
 
