@@ -47,5 +47,9 @@ An example of this report:
 * Open 'blockers+'
 
 ### Usage:
-Same steps as above whith changing the script you execute in step 8 to bugzilla_report.py
+1. install the following on the machine that will execute the script:
+   - python-bugzilla (pip install python-bugzilla) from https://github.com/python-bugzilla/python-bugzilla 
+2. Under config.py you have few lines that needs your attention to be specific to your product - please follow the guidelines in comments under config.py
+3. Under personal_config.py add your relevant information so the tool will be able to access
+4. Execute with: $ python bugzilla_report.py
 
