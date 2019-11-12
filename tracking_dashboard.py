@@ -77,4 +77,4 @@ for idx, bug in enumerate(stability_bugs):
     )
     g.update_sheet(row, column + 9, (now - converted).days)
 
-g.clean_rows(2, 32 + len(stability_bugs), 41)
+g.clean_rows(2, 32 + len(stability_bugs), 46)
