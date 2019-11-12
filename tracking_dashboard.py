@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import time
 import google_api as gapi
 from helpers import *
 import datetime
@@ -32,6 +33,7 @@ for idx, bug in enumerate(deployment_blockers):
     g.update_sheet(row, column + 9, (now - converted).days)
 
 g.clean_rows(2, 6 + len(deployment_blockers), 15)
+time.sleep(40)
 
 feature_blockers = get_feature_blockers()
 for idx, bug in enumerate(feature_blockers):
@@ -55,6 +57,7 @@ for idx, bug in enumerate(feature_blockers):
     g.update_sheet(row, column + 9, (now - converted).days)
 
 g.clean_rows(2, 19 + len(feature_blockers), 28)
+time.sleep(40)
 
 stability_bugs = get_stability_bugs()
 for idx, bug in enumerate(stability_bugs):
