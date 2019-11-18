@@ -342,11 +342,11 @@ def filter_only_bugs(bug_list):
     return filtered_list
 
 
-def get_new_arrivals():
+def get_new_arrivals(time_frame='-1w'):
     query = {
         "action" : "wrap",
         "chfield" : "[Bug creation]",
-        "chfieldfrom" : "-1w",
+        "chfieldfrom" : time_frame,
         "chfieldto" : "Now",
         "f3" : "OP",
         "f4" : "product",
@@ -361,11 +361,11 @@ def get_new_arrivals():
     return filter_only_bugs(bugs)
 
 
-def get_resolved_bugs():
+def get_resolved_bugs(time_frame='-1w'):
     query = {
        "bug_status" : "VERIFIED,ON_QA",
        "chfield" : "bug_status",
-       "chfieldfrom" : "-1w",
+       "chfieldfrom" : time_frame,
        "chfieldto" : "Now",
        "f3" : "OP",
        "f4" : "product",
