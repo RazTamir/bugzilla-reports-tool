@@ -11,7 +11,7 @@ g = gapi.GoogleSpreadSheetAPI(
 
 g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
 
-deployment_blockers = get_deployment_blockers()
+deployment_blockers = sort_by_pm_score(get_deployment_blockers())
 for idx, bug in enumerate(deployment_blockers):
     row = 6 + idx
     column = 2
@@ -35,7 +35,7 @@ for idx, bug in enumerate(deployment_blockers):
 g.clean_rows(2, 6 + len(deployment_blockers), 15)
 time.sleep(40)
 
-feature_blockers = get_feature_blockers()
+feature_blockers = sort_by_pm_score(get_feature_blockers())
 for idx, bug in enumerate(feature_blockers):
     row = 19 + idx
     column = 2
@@ -59,7 +59,7 @@ for idx, bug in enumerate(feature_blockers):
 g.clean_rows(2, 19 + len(feature_blockers), 28)
 time.sleep(40)
 
-stability_bugs = get_stability_bugs()
+stability_bugs = sort_by_pm_score(get_stability_bugs())
 for idx, bug in enumerate(stability_bugs):
     row = 32 + idx
     column = 2
