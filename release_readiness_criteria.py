@@ -67,8 +67,13 @@ regression_rate = round((all_regressions / float(all_bugs)), 4)
 g.update_sheet(10, 2, regression_rate)
 
 # FailedQA rate
-all_failed_qa = len(get_all_failedqa_bugs())
-failed_qa_rate = round((all_failed_qa / float(all_bugs)), 4)
+all_failed_qa = get_all_failedqa_bugs()
+failed_qa_count = 0
+for bz in all_failed_qa:
+    failed_qa_count += str(bz.get_history_raw()).count(
+        "'removed': 'ON_QA', 'added': 'ASSIGNED'"
+    )
+failed_qa_rate = round((failed_qa_count / float(all_bugs)), 4)
 g.update_sheet(13, 2, failed_qa_rate)
 
 # Verification rate
