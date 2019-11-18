@@ -35,7 +35,7 @@ Same steps as above whith changing the script you execute in step 8 to tracking_
 ## Arrival vs. Resolved trend
 An exeample of this dashboard:
 
-![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/Screenshot%20from%202019-10-28%2012-46-50.png)
+![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/Screenshot%20from%202019-11-18%2018-04-00.png)
 ### Usage:
 Same steps as above whith changing the script you execute in step 8 to arrivals_vs_resolved.py in a daily cronjob
 
