@@ -342,12 +342,12 @@ def filter_only_bugs(bug_list):
     return filtered_list
 
 
-def get_new_arrivals(time_frame='-1w'):
+def get_new_arrivals(changed_from='-1w', changed_to="Now"):
     query = {
         "action" : "wrap",
         "chfield" : "[Bug creation]",
-        "chfieldfrom" : time_frame,
-        "chfieldto" : "Now",
+        "chfieldfrom" : changed_from,
+        "chfieldto" : changed_to,
         "f3" : "OP",
         "f4" : "product",
         "f6" : "CP",
@@ -361,21 +361,22 @@ def get_new_arrivals(time_frame='-1w'):
     return filter_only_bugs(bugs)
 
 
-def get_resolved_bugs(time_frame='-1w'):
+def get_resolved_bugs(changed_from='-1w', changed_to="Now"):
     query = {
-       "bug_status" : "VERIFIED,ON_QA",
-       "chfield" : "bug_status",
-       "chfieldfrom" : time_frame,
-       "chfieldto" : "Now",
-       "f3" : "OP",
-       "f4" : "product",
-       "f6" : "CP",
-       "j3" : "OR",
-       "o4" : "equals",
-       "query_format" : "advanced",
-       "v4" : BUGZILLA_PRODUCT
+        "bug_status": "",
+        "chfield": "bug_status",
+        "chfieldfrom": changed_from,
+        "chfieldto": changed_to,
+        "chfieldvalue": "ON_QA",
+        "classification": "Red Hat",
+        "f3": "OP",
+        "f6": "CP",
+        "j3": "OR",
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced"
     }
     bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, [ON_QA, VERIFIED])
     return filter_only_bugs(bugs)
 
 
@@ -514,6 +515,42 @@ def get_doc_bugs():
     return bugs
 
 
+def get_performance_blockers():
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "classification": "Red Hat",
+        "f3": "OP",
+        "f6": "CP",
+        "j5": "OR",
+        "keywords": "TestBlocker, Performance, ",
+        "keywords_type": "allwords",
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced"
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
+def get_scale_blockers():
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "classification": "Red Hat",
+        "f3": "OP",
+        "f6": "CP",
+        "f7": "cf_qa_whiteboard",
+        "keywords": "TestBlocker,",
+        "keywords_type": "allwords",
+        "o7": "substring",
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced",
+        "v7": "Scale"
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
 def get_overall_backlog():
     query = {
         "action": "wrap",
@@ -609,21 +646,19 @@ def get_all_verified_bugs():
     return bugs
 
 
-def get_verified_weekly(changed_from='-1w', changed_to='Now'):
+def get_verified_bugs(changed_from='-1w', changed_to='Now'):
     query = {
-        "bug_status": "VERIFIED,RELEASE_PENDING,CLOSED",
+        "bug_status": "",
+        "chfield": "bug_status",
         "chfieldfrom": changed_from,
         "chfieldto": changed_to,
+        "chfieldvalue": "VERIFIED",
+        "classification": "Red Hat",
         "f3": "OP",
-        "f4": "product",
         "f6": "CP",
-        "f7": "bug_status",
         "j3": "OR",
-        "o4": "equals",
-        "o7": "changedto",
-        "query_format": "advanced",
-        "v4": BUGZILLA_PRODUCT,
-        "v7": "VERIFIED"
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced"
     }
     bugs = bzapi.query(query)
     return bugs
@@ -721,7 +756,7 @@ def get_deployment_blockers():
         "o4": "equals",
         "o7": "anywordssubstr",
         "query_format": "advanced",
-        "v4": "Red Hat OpenShift Container Storage",
+        "v4": BUGZILLA_PRODUCT,
         "v7": "Deployment_blocker"
 
     }
@@ -741,7 +776,7 @@ def get_feature_blockers():
         "o4": "equals",
         "o7": "anywordssubstr",
         "query_format": "advanced",
-        "v4": "Red Hat OpenShift Container Storage",
+        "v4": BUGZILLA_PRODUCT,
         "v7": "Feature_blocker"
 
     }
@@ -761,7 +796,7 @@ def get_stability_bugs():
         "o4": "equals",
         "o7": "anywordssubstr",
         "query_format": "advanced",
-        "v4": "Red Hat OpenShift Container Storage",
+        "v4": BUGZILLA_PRODUCT,
         "v7": "Stability"
 
     }
