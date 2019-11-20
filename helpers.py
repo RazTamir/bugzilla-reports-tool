@@ -361,6 +361,27 @@ def get_new_arrivals(changed_from='-1w', changed_to="Now"):
     return filter_only_bugs(bugs)
 
 
+def get_blocker_arrivals(changed_from='-1w', changed_to="Now"):
+    query = {
+       "bug_status" : "",
+       "chfield" : "[Bug creation]",
+       "chfieldfrom" : changed_from,
+       "chfieldto" : changed_to,
+       "f3" : "OP",
+       "f4" : "product",
+       "f6" : "CP",
+       "f7" : "flagtypes.name",
+       "j3" : "OR",
+       "o4" : "equals",
+       "o7" : "substring",
+       "query_format" : "advanced",
+       "v4" : BUGZILLA_PRODUCT,
+       "v7" : "blocker"
+    }
+    bugs = bzapi.query(query)
+    return filter_only_bugs(bugs)
+
+
 def get_resolved_bugs(changed_from='-1w', changed_to="Now"):
     query = {
         "bug_status": "",
