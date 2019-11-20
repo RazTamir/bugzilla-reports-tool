@@ -372,7 +372,7 @@ def get_resolved_bugs(changed_from='-1w', changed_to="Now"):
         "f3": "OP",
         "f6": "CP",
         "j3": "OR",
-        "product": "Red Hat OpenShift Container Storage",
+        "product": BUGZILLA_PRODUCT,
         "query_format": "advanced"
     }
     bugs = bzapi.query(query)
@@ -515,6 +515,42 @@ def get_doc_bugs():
     return bugs
 
 
+def get_performance_blockers():
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "classification": "Red Hat",
+        "f3": "OP",
+        "f6": "CP",
+        "j5": "OR",
+        "keywords": "TestBlocker, Performance, ",
+        "keywords_type": "allwords",
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced"
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
+def get_scale_blockers():
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "classification": "Red Hat",
+        "f3": "OP",
+        "f6": "CP",
+        "f7": "cf_qa_whiteboard",
+        "keywords": "TestBlocker,",
+        "keywords_type": "allwords",
+        "o7": "substring",
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced",
+        "v7": "Scale"
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
 def get_overall_backlog():
     query = {
         "action": "wrap",
@@ -621,7 +657,7 @@ def get_verified_bugs(changed_from='-1w', changed_to='Now'):
         "f3": "OP",
         "f6": "CP",
         "j3": "OR",
-        "product": "Red Hat OpenShift Container Storage",
+        "product": BUGZILLA_PRODUCT,
         "query_format": "advanced"
     }
     bugs = bzapi.query(query)
@@ -720,7 +756,7 @@ def get_deployment_blockers():
         "o4": "equals",
         "o7": "anywordssubstr",
         "query_format": "advanced",
-        "v4": "Red Hat OpenShift Container Storage",
+        "v4": BUGZILLA_PRODUCT,
         "v7": "Deployment_blocker"
 
     }
@@ -740,7 +776,7 @@ def get_feature_blockers():
         "o4": "equals",
         "o7": "anywordssubstr",
         "query_format": "advanced",
-        "v4": "Red Hat OpenShift Container Storage",
+        "v4": BUGZILLA_PRODUCT,
         "v7": "Feature_blocker"
 
     }
@@ -760,7 +796,7 @@ def get_stability_bugs():
         "o4": "equals",
         "o7": "anywordssubstr",
         "query_format": "advanced",
-        "v4": "Red Hat OpenShift Container Storage",
+        "v4": BUGZILLA_PRODUCT,
         "v7": "Stability"
 
     }
