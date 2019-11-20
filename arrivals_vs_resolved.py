@@ -17,9 +17,12 @@ resolved_bugs = get_resolved_bugs(
 verified_bugs = get_verified_bugs(
     changed_from=now.strftime("%Y-%m-%d"), changed_to=now.strftime("%Y-%m-%d")
 )
+blocker_bugs = get_blocker_arrivals(
+    changed_from=now.strftime("%Y-%m-%d"), changed_to=now.strftime("%Y-%m-%d")
+)
 
 g.insert_row(
     [now.strftime("%Y-%m-%d"), len(new_bugs), len(resolved_bugs),
-     len(verified_bugs)]
+     len(verified_bugs), len(blocker_bugs)]
 )
 
