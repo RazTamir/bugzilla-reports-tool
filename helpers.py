@@ -516,20 +516,20 @@ def get_untriaged_bugs(version_flag):
 
 def get_doc_bugs():
     query = {
-        "action": "wrap",
-        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED,ON_DEV",
         "f3": "OP",
         "f4": "product",
         "f6": "CP",
         "f7": "component",
+        "f8": "flagtypes.name",
         "j3": "OR",
         "o4": "equals",
         "o7": "equals",
+        "o8": "substring",
         "query_format": "advanced",
-        "target_milestone": "---",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "documentation"
-
+        "v7": "documentation",
+        "v8": BUGZILLA_VERSION_FLAG
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
