@@ -685,6 +685,36 @@ def get_verified_bugs(changed_from='-1w', changed_to='Now'):
     return bugs
 
 
+def get_changed_bugs_in_the_past_x_time(time='-1h'):
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED,ON_DEV,VERIFIED,ON_QA,RELEASE_PENDING",
+        "classification": "Red Hat",
+        "f3": "OP",
+        "f6": "CP",
+        "f9": "delta_ts",
+        "j3": "OR",
+        "o9": "greaterthan",
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced",
+        "v9": time
+    }
+
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, [
+        "NEW", "ASSIGNED", "POST", "MODIFIED", "ON_DEV", "VERIFIED", "ON_QA",
+        "RELEASE_PENDING"
+    ])
+    return bugs
+
+
+def get_quality_score(bug):
+    qa_wb = bug.cf_qa_whiteboard
+    if QUALITY_SCORE in qa_wb:
+        score_idx = int(qa_wb.find(QUALITY_SCORE) + len(QUALITY_SCORE))
+        return int(qa_wb[score_idx:score_idx + 3])
+    return -1
+
+
 def get_all_ready_for_testing_bugs():
     query = {
         "bug_status": "",
