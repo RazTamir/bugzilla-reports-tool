@@ -579,14 +579,10 @@ def get_overall_backlog():
         "f3": "OP",
         "f4": "product",
         "f6": "CP",
-        "f7": "component",
         "j3": "OR",
         "o4": "equals",
-        "o7": "nowordssubstr",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "Documentation"
-
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
