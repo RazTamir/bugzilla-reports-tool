@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import google_api as gapi
+import time
 from helpers import *
 import datetime
 
@@ -35,10 +36,9 @@ g.update_sheet(6, 9, untriaged)
 dec_bugs = len(get_doc_bugs())
 g.update_sheet(6, 10, dec_bugs)
 
-overall_backlog = len(get_overall_backlog())
-g.update_sheet(6, 11, overall_backlog)
-
-top_10_bugs = sort_by_pm_score(get_dev_backlog(BUGZILLA_VERSION_FLAG))[:10]
+# Sleep to ensure no exception will raise from Google API due to writes limit
+time.sleep(40)
+top_10_bugs = sort_by_pm_score(get_dev_backlog(""))[:10]
 for idx, bug in enumerate(top_10_bugs):
     row = 10 + idx
     column = 7
