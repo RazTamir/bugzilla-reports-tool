@@ -33,6 +33,7 @@ for idx, bug in enumerate(deployment_blockers):
     g.update_sheet(row, column + 9, (now - converted).days)
 
 g.clean_rows(2, 6 + len(deployment_blockers), 15)
+# Sleep to ensure no exception will raise from Google API due to writes limit
 time.sleep(40)
 
 feature_blockers = sort_by_pm_score(get_feature_blockers())
@@ -57,6 +58,7 @@ for idx, bug in enumerate(feature_blockers):
     g.update_sheet(row, column + 9, (now - converted).days)
 
 g.clean_rows(2, 19 + len(feature_blockers), 28)
+# Sleep to ensure no exception will raise from Google API due to writes limit
 time.sleep(40)
 
 stability_bugs = sort_by_pm_score(get_stability_bugs())
