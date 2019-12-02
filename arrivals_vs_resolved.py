@@ -22,7 +22,8 @@ blocker_bugs = get_blocker_arrivals(
 )
 
 g.insert_row(
-    [now.strftime("%Y-%m-%d"), len(new_bugs), len(resolved_bugs),
-     len(verified_bugs), len(blocker_bugs)]
+    [
+         now.strftime("%Y-%m-%d"), len(new_bugs), len(resolved_bugs),
+         len(verified_bugs), len(blocker_bugs)
+    ]
 )
-

@@ -53,7 +53,7 @@ class BugScore(object):
         if qa_score != -1:
             if qa_score != score:
                 qa_wb = qa_wb.replace(
-                    QUALITY_SCORE + str(qa_score), QUALITY_SCORE + str(score)
+                    QUALITY_IMPACT + str(qa_score), QUALITY_IMPACT + str(score)
                 )
                 bzapi.update_bugs(
                     self.bug.id, {'cf_qa_whiteboard': '\n' + qa_wb, 'nomail': 1}
@@ -62,7 +62,7 @@ class BugScore(object):
             bzapi.update_bugs(
                 self.bug.id, {
                     'cf_qa_whiteboard': (
-                        qa_wb + '\n' + QUALITY_SCORE + str(score)
+                        qa_wb + '\n' + QUALITY_IMPACT + str(score)
                     ), 'nomail': 1
                 }
             )
@@ -72,5 +72,3 @@ last_hour_bugs = get_overall_backlog()
 for bug in last_hour_bugs:
     bz = BugScore(bug)
     bz.update()
-
-

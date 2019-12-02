@@ -87,4 +87,4 @@ MISSING_ACK = [
     "qa_ack?"
 ]
 NEEDINFO = "needinfo?"
-QUALITY_SCORE = "quality_score="
+QUALITY_IMPACT = "quality_impact="

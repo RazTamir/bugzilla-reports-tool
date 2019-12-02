@@ -705,8 +705,8 @@ def get_changed_bugs_in_the_past_x_time(time='-1h'):
 
 def get_quality_score(bug):
     qa_wb = bug.cf_qa_whiteboard
-    if QUALITY_SCORE in qa_wb:
-        score_idx = int(qa_wb.find(QUALITY_SCORE) + len(QUALITY_SCORE))
+    if QUALITY_IMPACT in qa_wb:
+        score_idx = int(qa_wb.find(QUALITY_IMPACT) + len(QUALITY_IMPACT))
         return int(qa_wb[score_idx:score_idx + 3])
     return -1
 
