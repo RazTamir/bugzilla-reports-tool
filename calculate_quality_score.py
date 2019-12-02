@@ -68,7 +68,7 @@ class BugScore(object):
             )
 
 
-last_hour_bugs = get_overall_backlog()
+last_hour_bugs = get_changed_bugs_in_the_past_x_time()
 for bug in last_hour_bugs:
     bz = BugScore(bug)
     bz.update()
