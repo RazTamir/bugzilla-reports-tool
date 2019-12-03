@@ -522,14 +522,17 @@ def get_doc_bugs():
         "f6": "CP",
         "f7": "component",
         "f8": "flagtypes.name",
+        "f9": "keywords",
         "j3": "OR",
         "o4": "equals",
         "o7": "equals",
         "o8": "substring",
+        "o9": "notsubstring",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
         "v7": "documentation",
-        "v8": BUGZILLA_VERSION_FLAG
+        "v8": BUGZILLA_VERSION_FLAG,
+        "v9": "Tracking"
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
