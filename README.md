@@ -21,6 +21,7 @@ Name the Json from step 3 as 'google_api_secret.json'
    - gspread (pip install gspread) from https://github.com/burnash/gspread 
    - python-bugzilla (pip install python-bugzilla) from https://github.com/python-bugzilla/python-bugzilla 
    - oauth2client (pip install oauth2client) from https://github.com/googleapis/oauth2client
+   - pyyaml (pip install pyyaml) from https://github.com/yaml/pyyaml
 8. In the copied spreadsheet -> "Dashboard configuration", please change the values to fit your product and version
 9. Create a yml file under ~/.gapi (from step 3) and name the file 'personal_cfg.yml' and add the following data:
 ```
