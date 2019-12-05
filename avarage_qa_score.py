@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import google_api as gapi
 from helpers import *
 from datetime import datetime
 
@@ -9,9 +8,7 @@ TEST_BLOCKER = 20
 
 
 now = datetime.today()
-g = gapi.GoogleSpreadSheetAPI(
-    f'{PRODUCT} QE - Quality Dashboard', "average_quality_score_data"
-)
+g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "average_quality_score_data")
 
 all_bugs = get_overall_backlog()
 if len(all_bugs) > 0:

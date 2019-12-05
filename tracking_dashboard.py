@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 import time
-import google_api as gapi
 from helpers import *
 import datetime
 
 now = datetime.datetime.now()
-g = gapi.GoogleSpreadSheetAPI(
-    f'{PRODUCT} QE - Quality Dashboard', "QE tracking dashboard"
-)
+g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "QE tracking dashboard")
 
 g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
 

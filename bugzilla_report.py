@@ -2,7 +2,7 @@
 import datetime
 
 from helpers import *
-from personal_config import *
+from config import *
 import sys
 
 temp = sys.stdout
