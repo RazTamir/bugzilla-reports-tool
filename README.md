@@ -35,7 +35,9 @@ bugzilla_report:
 ```
 The 'Bugzilla' section is a must have for this dashboard to work as the scripts needs access to Bugzilla
 
-10. Execute with: $ python3.7 release_readiness_criteria.py SPREADSHEET_NAME
+10. Execute with:
+
+$ python3.7 release_readiness_criteria.py SPREADSHEET_NAME
 11. A list of recommended cronjob exist in the 'Dashboard configuration' tab
 
 ## QE Tracking dashboard
@@ -44,6 +46,7 @@ An exeample of this dashboard:
 ![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/Screenshot%20from%202019-10-28%2012-46-50.png)
 ### Usage:
 Same steps as above with changing the script you execute in step 8 to:
+
 $ python3.7 tracking_dashboard.py SPREADSHEET_NAME
 
 ## Arrival vs. Resolved trend
@@ -52,6 +55,7 @@ An exeample of this dashboard:
 ![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/Screenshot%20from%202019-11-18%2018-04-00.png)
 ### Usage:
 Same steps as above with changing the script you execute in step 8 to:
+
 $ python3.7 arrivals_vs_resolved.py SPREADSHEET_NAME
 
 
