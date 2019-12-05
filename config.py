@@ -1,14 +1,35 @@
 import bugzilla
-from personal_config import *
+import yaml
+import sys
+import os
+import google_api as gapi
 
 # [CHANGE NEEDED] Add the relevant information for you report
-PRODUCT = 'OCS'
-VERSION = "4.2"
-BUGZILLA_PRODUCT = 'Red Hat OpenShift Container Storage'
+cfg_path = os.path.expanduser('~/.gapi/personal_cfg.yml')
+
+if len(sys.argv) != 2:
+    raise IndexError("You must provide the spreadsheet name to work with")
+
+SPREADSHEET_NAME = sys.argv[1]
+with open(cfg_path, 'r') as ymlfile:
+    cfg = yaml.full_load(ymlfile)
+    USER = cfg['bugzilla']['user']
+    PASSWORD = cfg['bugzilla']['password']
+
+    # For the Bugzilla reports
+    gmail_user = cfg['bugzilla_report']['gmail_address']
+    gmail_pwd = cfg['bugzilla_report']['gmail_pass']
+    mail_to = USER
+
+g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "Dashboard configuration")
+
+PRODUCT = g.get_cell_value(7, 3)
+BUGZILLA_PRODUCT = g.get_cell_value(7, 4)
+VERSION = g.get_cell_value(7, 6)
 # The version flag should contain only x and y releases:
 # ocs-4.2.0 --> ocs-x.y.z so you'll need to add only ocs-4.2 in order to see
 # all bugs in version x.y
-BUGZILLA_VERSION_FLAG = 'ocs-4.2'
+BUGZILLA_VERSION_FLAG = g.get_cell_value(7, 5)
 
 # [CHANGE NEEDED] List here all the teams you want to sample, for example:
 team1 = "manage"
