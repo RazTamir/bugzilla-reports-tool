@@ -38,6 +38,7 @@ The 'Bugzilla' section is a must have for this dashboard to work as the scripts 
 10. Execute with:
 
 $ python3.7 release_readiness_criteria.py SPREADSHEET_NAME
+
 11. A list of recommended cronjob exist in the 'Dashboard configuration' tab
 
 ## QE Tracking dashboard
