@@ -2,7 +2,7 @@
 from helpers import *
 from datetime import datetime, timedelta
 
-now = datetime.today() - timedelta(days=1)
+now = datetime.today()
 g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "arrivals_vs_resolved_data")
 
 new_bugs = get_new_arrivals(
