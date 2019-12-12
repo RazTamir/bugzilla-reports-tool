@@ -249,6 +249,10 @@ def filter_by_status(bugs, status):
     return [bug for bug in bugs if bug.status in status]
 
 
+def filter_by_severity(bugs, severity):
+    return [bug for bug in bugs if bug.bug_severity in severity]
+
+
 def report_on_qa_blockers():
 
     def print_report(bugs):
@@ -575,7 +579,7 @@ def get_scale_blockers():
     return bugs
 
 
-def get_overall_backlog():
+def get_overall_backlog(version=''):
     query = {
         "action": "wrap",
         "bug_status": "NEW,ASSIGNED,POST,MODIFIED,ON_DEV",
@@ -587,6 +591,10 @@ def get_overall_backlog():
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
     }
+    if version:
+        query['f7'] = "flagtypes.name"
+        query['o7'] = 'substring'
+        query['v7'] = version
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
     return bugs
