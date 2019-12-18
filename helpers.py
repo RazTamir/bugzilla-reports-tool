@@ -355,11 +355,14 @@ def get_new_arrivals(changed_from='-1w', changed_to="Now"):
         "f3" : "OP",
         "f4" : "product",
         "f6" : "CP",
+        "f7": "component",
         "j3" : "OR",
         "o4" : "equals",
+        "o7": "notsubstring",
         "query_format" : "advanced",
         "target_milestone" : "---",
-        "v4" : BUGZILLA_PRODUCT
+        "v4" : BUGZILLA_PRODUCT,
+        "v7": "documentation"
     }
     bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
@@ -380,7 +383,10 @@ def get_blocker_arrivals(changed_from='-1w', changed_to="Now"):
        "o7" : "substring",
        "query_format" : "advanced",
        "v4" : BUGZILLA_PRODUCT,
-       "v7" : "blocker"
+       "v7" : "blocker",
+       "f8": "component",
+       "o8": "notsubstring",
+       "v8": "documentation",
     }
     bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
@@ -396,6 +402,9 @@ def get_resolved_bugs(changed_from='-1w', changed_to="Now"):
         "classification": "Red Hat",
         "f3": "OP",
         "f6": "CP",
+        "f7": "component",
+        "o7": "notsubstring",
+        "v7": "documentation",
         "j3": "OR",
         "product": BUGZILLA_PRODUCT,
         "query_format": "advanced"
@@ -610,7 +619,10 @@ def get_all_bugs():
         "j3": "OR",
         "o4": "equals",
         "query_format": "advanced",
-        "v4": BUGZILLA_PRODUCT
+        "v4": BUGZILLA_PRODUCT,
+        "f8": "component",
+        "o8": "notsubstring",
+        "v8": "documentation",
 
     }
     bugs = bzapi.query(query)
@@ -630,7 +642,10 @@ def get_all_regression_bugs():
         "o7": "anywordssubstr",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "Regression"
+        "v7": "Regression",
+        "f8": "component",
+        "o8": "notsubstring",
+        "v8": "documentation",
 
     }
     bugs = bzapi.query(query)
@@ -650,7 +665,10 @@ def get_all_failedqa_bugs():
         "o7": "substring",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "FailedQA"
+        "v7": "FailedQA",
+        "f8": "component",
+        "o8": "notsubstring",
+        "v8": "documentation",
     }
     bugs = bzapi.query(query)
     return bugs
