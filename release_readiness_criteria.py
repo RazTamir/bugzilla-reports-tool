@@ -87,6 +87,6 @@ for c_from, c_to in [
     ('-1w', 'Now'), ('-2w', '-1w'), ('-3w', '-2w'), ('-4w', '-3w'),
     ('-5w', '-4w'), ('-6w', '-5w'), ('-7w', '-6w'), ('-8w', '-7w')
 ]:
-    this_week = len(get_verified_bugs(c_from, c_to))
+    this_week = len(get_verified_bugs(changed_from=c_from, changed_to=c_to))
     verified_weekly += this_week
 g.update_sheet(19, 2, verified_weekly / 8)
