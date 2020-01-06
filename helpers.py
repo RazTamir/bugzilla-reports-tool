@@ -344,7 +344,7 @@ def filter_only_bugs(bug_list):
     return filtered_list
 
 
-def get_new_arrivals(changed_from='-1w', changed_to="Now"):
+def get_new_arrivals(version=VERSION, changed_from='-1w', changed_to="Now"):
     query = {
         "action": "wrap",
         "chfield" : "[Bug creation]",
@@ -359,13 +359,14 @@ def get_new_arrivals(changed_from='-1w', changed_to="Now"):
         "target_milestone": "---",
         "classification": "Red Hat",
         "product": BUGZILLA_PRODUCT,
-        "v7": "documentation"
+        "v7": "documentation",
+        "version": version
     }
     bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
 
 
-def get_blocker_arrivals(changed_from='-1w', changed_to="Now"):
+def get_blocker_arrivals(version=VERSION, changed_from='-1w', changed_to="Now"):
     query = {
         "bug_status": "",
         "chfield": "[Bug creation]",
@@ -383,12 +384,13 @@ def get_blocker_arrivals(changed_from='-1w', changed_to="Now"):
         "f8": "component",
         "o8": "notsubstring",
         "v8": "documentation",
+        "version": version
     }
     bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
 
 
-def get_resolved_bugs(changed_from='-1w', changed_to="Now"):
+def get_resolved_bugs(version=VERSION, changed_from='-1w', changed_to="Now"):
     query = {
         "bug_status": "",
         "chfield": "bug_status",
@@ -403,7 +405,8 @@ def get_resolved_bugs(changed_from='-1w', changed_to="Now"):
         "v7": "documentation",
         "j3": "OR",
         "product": BUGZILLA_PRODUCT,
-        "query_format": "advanced"
+        "query_format": "advanced",
+        "version": version
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, [ON_QA, VERIFIED])
@@ -729,7 +732,7 @@ def get_all_verified_bugs(version=''):
     return bugs
 
 
-def get_verified_bugs(changed_from='-1w', changed_to='Now'):
+def get_verified_bugs(version=VERSION, changed_from='-1w', changed_to='Now'):
     query = {
         "bug_status": "",
         "chfield": "bug_status",
@@ -746,6 +749,7 @@ def get_verified_bugs(changed_from='-1w', changed_to='Now'):
             "id",
             "status",
         ],
+        "version": version
     }
     bugs = bzapi.query(query)
     return bugs
