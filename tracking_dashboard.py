@@ -6,8 +6,6 @@ import datetime
 now = datetime.datetime.now()
 g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "QE tracking dashboard")
 
-g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
-
 deployment_blockers = sort_by_pm_score(get_deployment_blockers())
 for idx, bug in enumerate(deployment_blockers):
     row = 6 + idx
@@ -80,3 +78,5 @@ for idx, bug in enumerate(stability_bugs):
     g.update_sheet(row, column + 9, (now - converted).days)
 
 g.clean_rows(2, 32 + len(stability_bugs), 46)
+
+g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
