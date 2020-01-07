@@ -6,9 +6,6 @@ import datetime
 now = datetime.datetime.now()
 g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "Release Readiness Criteria")
 
-
-g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
-
 qe_backlog = len(get_qe_backlog())
 g.update_sheet(6, 3, qe_backlog)
 
@@ -90,3 +87,5 @@ for c_from, c_to in [
     this_week = len(get_verified_bugs(changed_from=c_from, changed_to=c_to))
     verified_weekly += this_week
 g.update_sheet(19, 2, verified_weekly / 8)
+
+g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')

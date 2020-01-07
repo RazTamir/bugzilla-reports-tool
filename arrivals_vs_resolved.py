@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from helpers import *
-from datetime import datetime, timedelta
+from datetime import datetime
 
 now = datetime.today()
 g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "arrivals_vs_resolved_data")

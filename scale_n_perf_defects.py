@@ -5,8 +5,6 @@ import datetime
 now = datetime.datetime.now()
 g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "Performance & scale blockers")
 
-g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
-
 perf_blockers = sort_by_pm_score(get_performance_blockers())
 for idx, bug in enumerate(perf_blockers):
     row = 23 + idx
@@ -52,3 +50,6 @@ for idx, bug in enumerate(scale_blockers):
     g.update_sheet(row, column + 9, (now - converted).days)
 
 g.clean_rows(2, 6 + len(scale_blockers), 19)
+
+
+g.update_sheet(1, 1, f'Last update: {now.strftime("%Y-%m-%d %H:%M")}')
