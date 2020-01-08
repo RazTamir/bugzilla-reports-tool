@@ -54,7 +54,7 @@ for idx, bug in enumerate(feature_blockers):
 
 g.clean_rows(2, 19 + len(feature_blockers), 28)
 # Sleep to ensure no exception will raise from Google API due to writes limit
-time.sleep(40)
+time.sleep(60)
 
 stability_bugs = sort_by_pm_score(get_stability_bugs())
 for idx, bug in enumerate(stability_bugs):
