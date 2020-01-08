@@ -871,7 +871,7 @@ def get_on_qa_blockers():
     return filter_only_bugs(bugs)
 
 
-def get_deployment_blockers():
+def get_deployment_blockers(version=BUGZILLA_VERSION_FLAG):
     query = {
         "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
         "f3": "OP",
@@ -883,7 +883,11 @@ def get_deployment_blockers():
         "o7": "anywordssubstr",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "Deployment_blocker"
+        "v7": "Deployment_blocker",
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version
+
 
     }
     bugs = bzapi.query(query)
@@ -891,7 +895,7 @@ def get_deployment_blockers():
     return bugs
 
 
-def get_feature_blockers():
+def get_feature_blockers(version=BUGZILLA_VERSION_FLAG):
     query = {
         "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
         "f3": "OP",
@@ -903,7 +907,10 @@ def get_feature_blockers():
         "o7": "anywordssubstr",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "Feature_blocker"
+        "v7": "Feature_blocker",
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version
 
     }
     bugs = bzapi.query(query)
@@ -911,7 +918,7 @@ def get_feature_blockers():
     return bugs
 
 
-def get_stability_bugs():
+def get_stability_bugs(version=BUGZILLA_VERSION_FLAG):
     query = {
         "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
         "f3": "OP",
@@ -923,7 +930,10 @@ def get_stability_bugs():
         "o7": "anywordssubstr",
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
-        "v7": "Stability"
+        "v7": "Stability",
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version
 
     }
     bugs = bzapi.query(query)
