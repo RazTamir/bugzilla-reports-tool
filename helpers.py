@@ -722,7 +722,9 @@ def get_all_verified_bugs(version=''):
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
         "v7": "VERIFIED",
-        "version": version,
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version,
         "include_fields": [
             "id",
             "status",
@@ -800,7 +802,9 @@ def get_all_ready_for_testing_bugs(version=''):
         "query_format": "advanced",
         "v4": BUGZILLA_PRODUCT,
         "v7": "ON_QA",
-        "version": version,
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version,
         "include_fields": [
             "id",
             "status",
