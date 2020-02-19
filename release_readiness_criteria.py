@@ -61,7 +61,7 @@ if all_bugs > 0:
     g.update_sheet(10, 2, regression_rate)
 
 # FailedQA rate
-all_failed_qa = get_all_failedqa_bugs(version=VERSION)
+all_failed_qa = get_all_failedqa_bugs(version=BUGZILLA_VERSION_FLAG)
 failed_qa_count = 0
 for bz in all_failed_qa:
     failed_qa_count += str(bz.get_history_raw()).count(
@@ -72,8 +72,10 @@ if all_bugs > 0:
     g.update_sheet(13, 2, failed_qa_rate)
 
 # Verification rate
-all_verified = len(get_all_verified_bugs(version=VERSION))
-all_ready_for_testing = len(get_all_ready_for_testing_bugs(version=VERSION))
+all_verified = len(get_all_verified_bugs(version=BUGZILLA_VERSION_FLAG))
+all_ready_for_testing = len(get_all_ready_for_testing_bugs(
+    version=BUGZILLA_VERSION_FLAG
+))
 if all_ready_for_testing > 0:
     failed_qa_rate = round((all_verified / float(all_ready_for_testing)), 4)
     g.update_sheet(16, 2, failed_qa_rate)
