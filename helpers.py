@@ -943,3 +943,22 @@ def get_stability_bugs(version=BUGZILLA_VERSION_FLAG):
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
     return bugs
+
+
+def get_gss_closed_loop(flag):
+    query = {
+        "bug_status": "",
+        "classification": "Red Hat",
+        "f3": "flagtypes.name",
+        "include_fields": [
+            "id",
+            "status",
+        ],
+        "o3": "substring",
+        "product": BUGZILLA_PRODUCT,
+        "query_format": "advanced",
+        "v3": flag
+    }
+
+    bugs = bzapi.query(query)
+    return bugs
