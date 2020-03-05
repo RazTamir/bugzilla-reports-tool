@@ -631,7 +631,7 @@ def get_overall_backlog(version=''):
     return bugs
 
 
-def get_all_bugs(version=''):
+def get_all_bugs_in_version(version=''):
     query = {
         "action": "wrap",
         "classification": "Red Hat",
@@ -645,6 +645,31 @@ def get_all_bugs(version=''):
         "o8": "notsubstring",
         "v8": "documentation",
         "version": version,
+        "include_fields": [
+            "id",
+            "status",
+        ],
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+
+def get_all_bugs_targeted_to_version(version=BUGZILLA_VERSION_FLAG):
+    query = {
+        "action": "wrap",
+        "classification": "Red Hat",
+        "bug_status": "__open__,__closed__",
+        "f3": "OP",
+        "f6": "CP",
+        "j3": "OR",
+        "query_format": "advanced",
+        "product": BUGZILLA_PRODUCT,
+        "f8": "component",
+        "o8": "notsubstring",
+        "v8": "documentation",
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version,
         "include_fields": [
             "id",
             "status",
@@ -699,7 +724,9 @@ def get_all_failedqa_bugs(version=''):
         "f8": "component",
         "o8": "notsubstring",
         "v8": "documentation",
-        "version": version,
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version,
         "include_fields": [
             "id",
             "status",
@@ -734,7 +761,7 @@ def get_all_verified_bugs(version=''):
     return bugs
 
 
-def get_verified_bugs(version=VERSION, changed_from='-1w', changed_to='Now'):
+def get_verified_bugs(version='', changed_from='-1w', changed_to='Now'):
     query = {
         "bug_status": "",
         "chfield": "bug_status",
@@ -751,7 +778,9 @@ def get_verified_bugs(version=VERSION, changed_from='-1w', changed_to='Now'):
             "id",
             "status",
         ],
-        "version": version
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version
     }
     bugs = bzapi.query(query)
     return bugs

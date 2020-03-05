@@ -54,23 +54,26 @@ for idx, bug in enumerate(top_10_bugs):
     g.update_sheet(row, column + 9, (now - converted).days)
 
 # Regression rate
-all_bugs = len(get_all_bugs(version=VERSION))
+all_bugs = len(get_all_bugs_in_version(version=VERSION))
 all_regressions = len(get_all_regression_bugs(version=VERSION))
 if all_bugs > 0:
     regression_rate = round((all_regressions / float(all_bugs)), 4)
     g.update_sheet(10, 2, regression_rate)
 
 # FailedQA rate
+all_bug_to_version = get_all_bugs_targeted_to_version()
 all_failed_qa = get_all_failedqa_bugs(version=BUGZILLA_VERSION_FLAG)
 failed_qa_count = 0
 for bz in all_failed_qa:
     failed_qa_count += str(bz.get_history_raw()).count(
         "'removed': 'ON_QA', 'added': 'ASSIGNED'"
     )
-if all_bugs > 0:
-    failed_qa_rate = round((failed_qa_count / float(all_bugs)), 4)
+fixed_bugs = 0
+for bz in all_bug_to_version:
+    fixed_bugs += str(bz.get_history_raw()).count("'added': 'ON_QA'")
+if fixed_bugs > 0:
+    failed_qa_rate = round((failed_qa_count / float(fixed_bugs)), 4)
     g.update_sheet(13, 2, failed_qa_rate)
-
 # Verification rate
 all_verified = len(get_all_verified_bugs(version=BUGZILLA_VERSION_FLAG))
 all_ready_for_testing = len(get_all_ready_for_testing_bugs(
@@ -86,7 +89,9 @@ for c_from, c_to in [
     ('-1w', 'Now'), ('-2w', '-1w'), ('-3w', '-2w'), ('-4w', '-3w'),
     ('-5w', '-4w'), ('-6w', '-5w'), ('-7w', '-6w'), ('-8w', '-7w')
 ]:
-    this_week = len(get_verified_bugs(changed_from=c_from, changed_to=c_to))
+    this_week = len(get_verified_bugs(
+        changed_from=c_from, changed_to=c_to
+    ))
     verified_weekly += this_week
 g.update_sheet(19, 2, verified_weekly / 8)
 
