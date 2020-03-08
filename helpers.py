@@ -390,7 +390,9 @@ def get_blocker_arrivals(version=VERSION, changed_from='-1w', changed_to="Now"):
     return filter_only_bugs(bugs)
 
 
-def get_resolved_bugs(version=VERSION, changed_from='-1w', changed_to="Now"):
+def get_resolved_bugs(
+    version=BUGZILLA_VERSION_FLAG, changed_from='-1w', changed_to="Now"
+):
     query = {
         "bug_status": "",
         "chfield": "bug_status",
@@ -406,7 +408,9 @@ def get_resolved_bugs(version=VERSION, changed_from='-1w', changed_to="Now"):
         "j3": "OR",
         "product": BUGZILLA_PRODUCT,
         "query_format": "advanced",
-        "version": version
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version,
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, [ON_QA, VERIFIED])
