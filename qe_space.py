@@ -20,3 +20,7 @@ for key, val in bug_to_member.items():
     g.update_sheet(row, col, key)
     g.update_sheet(row, col+1, f'=HYPERLINK("{str(link)}", "{len(val)}")')
     row += 1
+for row in range(row, 30 + 1):
+    if g.get_cell_value(row, col):
+        g.update_sheet(row, col, "")
+        g.update_sheet(row, col + 1, "")
