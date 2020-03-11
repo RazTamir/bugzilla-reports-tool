@@ -432,7 +432,8 @@ def get_qe_backlog():
         "include_fields": [
             "id",
             "status",
-            "qa_contact"
+            "qa_contact",
+            "severity"
         ],
 
     }
