@@ -13,8 +13,8 @@ for bug in qe_backlog:
         bug_to_member[qa_contact] = list()
     bug_to_member[qa_contact].append(bug)
 
-row = 3
-col = 3
+row = 4
+col = 2
 for key, bugs in bug_to_member.items():
     bugs_distribution = dict()
     bugs_distribution['urgent'] = filter_by_severity(bugs, 'urgent')
