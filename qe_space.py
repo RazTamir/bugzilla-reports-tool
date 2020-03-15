@@ -37,6 +37,9 @@ for row in range(row, 30 + 1):
     if g.get_cell_value(row, col):
         g.update_sheet(row, col, "")
         g.update_sheet(row, col + 1, "")
+        g.update_sheet(row, col + 2, "")
+        g.update_sheet(row, col + 3, "")
+        g.update_sheet(row, col + 4, "")
     else:
         break
 
