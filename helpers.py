@@ -206,10 +206,10 @@ def report_open_candidate_blockers():
             print("<p>&nbsp;&nbsp;&nbsp;Link to bugs: {}</p>".format(link))
 
 
-def filter_by_component(bugs):
+def filter_by_component(bugs, verify_status=True):
     bugs_by_comp = copy.deepcopy(COMPONENTS)
     for bug in bugs:
-        if not (
+        if verify_status and not (
             bug.status in OPEN_BUGS or bug.status in (
                 VERIFIED or bug.status in ON_QA
             )
@@ -980,14 +980,17 @@ def get_stability_bugs(version=BUGZILLA_VERSION_FLAG):
     return bugs
 
 
-def get_gss_closed_loop(flag):
+def get_gss_closed_loop(flag, status=""):
     query = {
-        "bug_status": "",
+        "bug_status": status,
         "classification": "Red Hat",
         "f3": "flagtypes.name",
         "include_fields": [
             "id",
             "status",
+            "component",
+            "severity",
+            "keywords",
         ],
         "o3": "substring",
         "product": BUGZILLA_PRODUCT,
@@ -996,4 +999,4 @@ def get_gss_closed_loop(flag):
     }
 
     bugs = bzapi.query(query)
-    return bugs
+    return filter_only_bugs(bugs)
