@@ -52,6 +52,17 @@ BUGS_BY_TEAM = {
     team3: [],
 }
 
+team_members_g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "QE_team_member")
+
+TEAM_MEMBERS = list()
+idx = 1
+while True:
+    member = team_members_g.get_cell_value(idx, 1)
+    if member:
+        TEAM_MEMBERS.append(member)
+        idx += 1
+    else:
+        break
 # [CHANGE NEEDED] Add the team members divided into teams. For example:
 teams = {
     team1: [
