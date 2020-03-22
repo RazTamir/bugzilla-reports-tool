@@ -441,7 +441,9 @@ def get_qe_backlog():
     return bugs
 
 
-def get_bugs_per_member(member_name, product=''):
+def get_bugs_per_member(
+    member_name, product='', version="",
+):
     query = {
         "bug_status": "ON_QA",
         "classification": "Red Hat",
@@ -456,7 +458,10 @@ def get_bugs_per_member(member_name, product=''):
         ],
         "o2": "equals",
         "query_format": "advanced",
-        "v2": f"{member_name}@redhat.com"
+        "v2": f"{member_name}@redhat.com",
+        "f7": "flagtypes.name",
+        "o7": "substring",
+        "v7": version,
     }
     bugs = bzapi.query(query)
     return bugs
