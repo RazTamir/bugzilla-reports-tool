@@ -452,7 +452,6 @@ def get_bugs_per_member(member_name, product=''):
         "include_fields": [
             "id",
             "status",
-            "qa_contact",
             "severity"
         ],
         "o2": "equals",

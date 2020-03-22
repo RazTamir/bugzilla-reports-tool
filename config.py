@@ -30,6 +30,7 @@ VERSION = g.get_cell_value(7, 6)
 # ocs-4.2.0 --> ocs-x.y.z so you'll need to add only ocs-4.2 in order to see
 # all bugs in version x.y
 BUGZILLA_VERSION_FLAG = g.get_cell_value(7, 5)
+LAYERED_PRODUCT = g.get_cell_value(10, 4)
 
 # [CHANGE NEEDED] List here all the teams you want to sample, for example:
 team1 = "manage"
