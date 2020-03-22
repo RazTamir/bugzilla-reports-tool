@@ -32,7 +32,8 @@ g.update_sheet(6, 10, dec_bugs)
 
 # Sleep to ensure no exception will raise from Google API due to writes limit
 time.sleep(40)
-top_10_bugs = sort_by_pm_score(get_dev_backlog(""))[:10]
+bugs_for_pm_score = filter_only_bugs(get_dev_backlog(""))
+top_10_bugs = sort_by_pm_score(bugs_for_pm_score)[:10]
 for idx, bug in enumerate(top_10_bugs):
     row = 10 + idx
     column = 7

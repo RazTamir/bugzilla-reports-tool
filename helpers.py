@@ -486,7 +486,8 @@ def get_dev_backlog(version):
             "status",
             "component",
             "severity",
-            "creation_time"
+            "creation_time",
+            "keywords",
         ],
 
     }
