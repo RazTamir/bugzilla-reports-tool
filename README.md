@@ -6,7 +6,7 @@ The quality dashboard is fully automated and the template Google Spreadsheet can
 ## Quality dashboard
 An exeample of this dashboard:
 
-![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/OCS%204.3%20QE%20-%20Quality%20Dashboard.pdf)
+![alt text](https://github.com/RazTamir/bugzilla-reports-tool/blob/master/pics/Screenshot%20from%202020-04-05%2015-23-43.png)
 
 ### Usage:
 
