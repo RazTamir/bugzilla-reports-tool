@@ -794,7 +794,9 @@ def get_all_verified_bugs(version=''):
     return bugs
 
 
-def get_verified_bugs(version='', changed_from='-1w', changed_to='Now'):
+def get_verified_bugs(
+    version=BUGZILLA_VERSION_FLAG, changed_from='-1w', changed_to='Now'
+):
     query = {
         "bug_status": "",
         "chfield": "bug_status",
