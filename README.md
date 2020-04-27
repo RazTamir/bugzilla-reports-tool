@@ -1,7 +1,7 @@
 # bugzilla-reports-tool
 
 This tool will allow you to create a Quality dashboard for your product and send (weekly or whenever you want, depend on cronjob) reports with bug status.
-The quality dashboard is fully automated and the template Google Spreadsheet can be found here - https://docs.google.com/spreadsheets/d/1hmsG9wDIi0sayeAOEmYjpS8sV4c5diZhbsA3uyhQeGU/edit?usp=sharing
+The quality dashboard is fully automated and the template Google Spreadsheet can be found here - https://docs.google.com/spreadsheets/d/1K2ImPbbFO52njNC2CjvRT5zpzO7wcvOp5L3GSkkGoR8/edit?usp=sharing
 
 ## Quality dashboard
 An exeample of this dashboard:
