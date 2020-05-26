@@ -247,6 +247,10 @@ def filter_by_status(bugs, status):
     return [bug for bug in bugs if bug.status in status]
 
 
+def filter_by_closed_resolution(bugs, resolution):
+    return [bug for bug in bugs if bug.resolution in resolution]
+
+
 def filter_by_severity(bugs, severity):
     return [bug for bug in bugs if bug.bug_severity in severity]
 
@@ -501,7 +505,7 @@ def get_dev_backlog(version):
     return bugs
 
 
-def get_critical_bugs():
+def get_critical_bugs(version=VERSION):
     bugs = []
     query = {
         "bug_severity": "urgent",
@@ -513,6 +517,7 @@ def get_critical_bugs():
         "keywords_type": "nowords",
         "classification": "Red Hat",
         "product": BUGZILLA_PRODUCT,
+        "version": version,
         "include_fields": [
             "id",
             "status",
@@ -524,7 +529,7 @@ def get_critical_bugs():
     return bugs
 
 
-def get_regression_bugs():
+def get_regression_bugs(version=VERSION):
     query = {
         "action": "wrap",
         "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
@@ -537,6 +542,7 @@ def get_regression_bugs():
         "classification": "Red Hat",
         "product": BUGZILLA_PRODUCT,
         "v7": "Regression",
+        "version": version,
         "include_fields": [
             "id",
             "status",
@@ -652,6 +658,9 @@ def get_overall_backlog(version=''):
         "f6": "CP",
         "j3": "OR",
         "o4": "equals",
+        "f8": "component",
+        "o8": "notsubstring",
+        "v8": "documentation",
         "query_format": "advanced",
         "product": BUGZILLA_PRODUCT,
     }
@@ -681,9 +690,11 @@ def get_all_bugs_in_version(version=''):
         "include_fields": [
             "id",
             "status",
+            "resolution"
         ],
     }
     bugs = bzapi.query(query)
+    bugs = filter_by_closed_resolution(bugs, CLOSED_RESOLUTION)
     return bugs
 
 
@@ -706,9 +717,11 @@ def get_all_bugs_targeted_to_version(version=BUGZILLA_VERSION_FLAG):
         "include_fields": [
             "id",
             "status",
+            "resolution"
         ],
     }
     bugs = bzapi.query(query)
+    bugs = filter_by_closed_resolution(bugs, CLOSED_RESOLUTION)
     return bugs
 
 
@@ -733,10 +746,12 @@ def get_all_regression_bugs(version=''):
         "include_fields": [
             "id",
             "status",
+            "resolution"
         ],
 
     }
     bugs = bzapi.query(query)
+    bugs = filter_by_closed_resolution(bugs, CLOSED_RESOLUTION)
     return bugs
 
 
@@ -763,9 +778,11 @@ def get_all_failedqa_bugs(version=''):
         "include_fields": [
             "id",
             "status",
+            "resolution"
         ],
     }
     bugs = bzapi.query(query)
+    bugs = filter_by_closed_resolution(bugs, CLOSED_RESOLUTION)
     return bugs
 
 
@@ -1001,7 +1018,30 @@ def get_stability_bugs(version=BUGZILLA_VERSION_FLAG):
         "v7": "Stability",
         "f9": "flagtypes.name",
         "o9": "substring",
-        "v9": version
+        "v9": version,
+
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
+def get_testing_blockers(version=BUGZILLA_VERSION_FLAG):
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "keywords",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "anywordssubstr",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v7": "TestBlocker",
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version,
 
     }
     bugs = bzapi.query(query)
