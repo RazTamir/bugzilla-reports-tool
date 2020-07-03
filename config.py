@@ -31,6 +31,7 @@ VERSION = g.get_cell_value(7, 6)
 # all bugs in version x.y
 BUGZILLA_VERSION_FLAG = g.get_cell_value(7, 5)
 LAYERED_PRODUCT = g.get_cell_value(10, 4)
+LAYERED_PRODUCT_VERSION = g.get_cell_value(10, 5)
 
 # [CHANGE NEEDED] List here all the teams you want to sample, for example:
 team1 = "manage"
@@ -99,6 +100,8 @@ COMPONENTS = {
     'must-gather': [],
 
 }
+# [CHANGE NEEDED] Put here your component name in the layered product
+LAYERED_PRODUCT_COMPONENT = "my component in the layered product"
 
 backlog = {}
 URL = "bugzilla.redhat.com"
@@ -109,6 +112,7 @@ VERIFIED = "VERIFIED"
 ON_QA = "ON_QA"
 MODIFIED = "MODIFIED"
 OPEN_BUGS = "NEW,ASSIGNED,POST,MODIFIED"
+OPEN_BUGS_LIST_WITH_ON_QA = "NEW,ASSIGNED,POST,MODIFIED,ON_QA"
 OPEN_BUGS_LIST = ["NEW", "ASSIGNED", "POST", "MODIFIED"]
 CLOSED_RESOLUTION = [
     "", "WONTFIX", "DEFFERED", "CURRENTRELEASE", "ERRATA", "UPSTREAM",

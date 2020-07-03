@@ -1043,3 +1043,71 @@ def get_gss_closed_loop(flag, status=""):
 
     bugs = bzapi.query(query)
     return filter_only_bugs(bugs)
+
+def get_qe_backlog_by_component(product=BUGZILLA_PRODUCT, target_version=VERSION, component=""):
+    query = {
+        "bug_status": "ON_QA",
+        "query_format": "advanced",
+        "product": product,
+        "component" : component,
+        "target_release": target_version,
+        "include_fields": [
+            "id",
+            "status",
+            "qa_contact",
+            "severity"
+        ],
+    }
+    bugs = bzapi.query(query)
+    return bugs
+
+def get_dev_backlog_by_component(product=BUGZILLA_PRODUCT, target_version=VERSION, component=""):
+    query = {
+        "bug_status" : "NEW,ASSIGNED,POST,MODIFIED,ON_DEV",
+        "component" : component,
+        "include_fields" : [
+            "id",
+            "status",
+            "summary",
+            "target_release",
+            "severity",
+            "qa_contact"
+        ],
+        "product" : product,
+        "query_format" : "advanced",
+        "target_release" : target_version
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+def get_overall_backlog_by_component(product=BUGZILLA_PRODUCT, component=""):
+    query = {
+        "action" : "wrap",
+        "bug_status" : OPEN_BUGS_LIST_WITH_ON_QA,
+        # "classification" : "Red Hat",
+        "product" : product,
+        "component" : component,
+        "query_format" : "advanced",
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST_WITH_ON_QA)
+    return bugs
+
+def get_dependent_product_bugs(product=BUGZILLA_PRODUCT,severity=""):
+    query = {
+        "bug_status" : "",
+        "f1" : "bug_status",
+        "f2" : "OP",
+        "f3" : "dependent_products",
+        "j2" : "OR",
+        "o1" : "anywordssubstr",
+        "o3" : "equals",
+        "query_format" : "advanced",
+        "v1" : OPEN_BUGS_LIST_WITH_ON_QA,
+        "v3" : product,
+    }
+    if severity:
+        query["bug_severity"] = severity
+    bugs = bzapi.query(query)
+    return bugs
