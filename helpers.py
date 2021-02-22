@@ -1042,7 +1042,6 @@ def get_testing_blockers(version=BUGZILLA_VERSION_FLAG):
         "f9": "flagtypes.name",
         "o9": "substring",
         "v9": version,
-
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
