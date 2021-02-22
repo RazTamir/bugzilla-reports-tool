@@ -658,6 +658,9 @@ def get_overall_backlog(version=''):
         "f6": "CP",
         "j3": "OR",
         "o4": "equals",
+        "f8": "component",
+        "o8": "notsubstring",
+        "v8": "documentation",
         "query_format": "advanced",
         "product": BUGZILLA_PRODUCT,
     }
@@ -1015,8 +1018,30 @@ def get_stability_bugs(version=BUGZILLA_VERSION_FLAG):
         "v7": "Stability",
         "f9": "flagtypes.name",
         "o9": "substring",
-        "v9": version
+        "v9": version,
 
+    }
+    bugs = bzapi.query(query)
+    bugs = filter_by_status(bugs, OPEN_BUGS_LIST)
+    return bugs
+
+
+def get_testing_blockers(version=BUGZILLA_VERSION_FLAG):
+    query = {
+        "bug_status": "NEW,ASSIGNED,POST,MODIFIED",
+        "f3": "OP",
+        "f4": "product",
+        "f6": "CP",
+        "f7": "keywords",
+        "j3": "OR",
+        "o4": "equals",
+        "o7": "anywordssubstr",
+        "query_format": "advanced",
+        "v4": BUGZILLA_PRODUCT,
+        "v7": "TestBlocker",
+        "f9": "flagtypes.name",
+        "o9": "substring",
+        "v9": version,
     }
     bugs = bzapi.query(query)
     bugs = filter_by_status(bugs, OPEN_BUGS_LIST)

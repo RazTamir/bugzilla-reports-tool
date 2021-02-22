@@ -11,10 +11,10 @@ now = datetime.today()
 g = gapi.GoogleSpreadSheetAPI(SPREADSHEET_NAME, "average_quality_score_data")
 
 all_bugs = get_overall_backlog()
-if len(all_bugs) > 0:
-    all_qa_scores = [get_quality_score(b) for b in all_bugs]
-    all_qa_scores = list(filter(lambda a: a != -1, all_qa_scores))
-    avarage_qa_score = 100 - sum(all_qa_scores) / len(all_qa_scores)
-    g.insert_row(
-        [now.strftime("%Y-%m-%d"), avarage_qa_score]
-    )
+# if len(all_bugs) > 0:
+#     all_qa_scores = [get_quality_score(b) for b in all_bugs]
+#     all_qa_scores = list(filter(lambda a: a != -1, all_qa_scores))
+#     avarage_qa_score = 100 - sum(all_qa_scores) / len(all_qa_scores)
+g.insert_row(
+    [now.strftime("%Y-%m-%d"), len(all_bugs)]
+)
